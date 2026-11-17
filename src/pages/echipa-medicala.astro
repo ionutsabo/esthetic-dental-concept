@@ -1,0 +1,140 @@
+---
+import Layout from "@/layouts/Clinic.astro";
+import EndCta from "@/components/site/EndCta.astro";
+import { DOCTORS } from "@/data/doctors.ts";
+import { treatmentBySlug } from "@/data/treatments.ts";
+---
+
+<Layout title="Echipa medicală" description="Medicii Esthetic Dental Center: specialiști în parodontologie, chirurgie, estetică, ortodonție și pedodonție." navInk>
+  <section class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb" data-fade><a href="/">Acasă</a><span>/</span><span aria-current="page">Echipa medicală</span></nav>
+      <h1 class="phead__title" data-split>Echipa <em>medicală</em></h1>
+      <div class="phead__row">
+        <p class="lead" data-fade style="--d:300ms">
+          Un specialist pentru fiecare ramură a stomatologiei. Medici care își fac timp să explice,
+          <span class="serif" style="color:var(--ink)">să asculte și să ghideze.</span>
+        </p>
+        <div class="tags" data-fade style="--d:450ms">
+          <span class="tag">2 medici primari</span>
+          <span class="tag">6 medici</span>
+          <span class="tag">Colaborăm de peste 10 ani</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap team">
+    {
+      DOCTORS.map((d, i) => (
+        <article class:list={["member", i % 2 && "member--rev"]} id={d.slug}>
+          <div class:list={["member__photo photo", d.cutout && "member__photo--cut"]} data-img>
+            <img src={d.img} alt={d.name} loading="lazy" />
+          </div>
+          <div class="member__text">
+            <p class="eyebrow" data-fade>{d.founder ? "Medic fondator" : "Medic specialist"}</p>
+            <h2 class="h1" data-split>{d.name.replace("Dr. ", "Dr. ")}</h2>
+            <p class="member__role" data-fade>{d.role}</p>
+            <p class="lead" data-fade>{d.bio}</p>
+            {d.quote && <p class="member__quote" data-fade>„{d.quote}”</p>}
+            <div class="member__tr" data-fade>
+              <span class="small">Tratamente</span>
+              <div class="tags">
+                {d.treatments.map((s) => (
+                  <a class="tag" href={`/tratamente/${s}`}>
+                    {treatmentBySlug(s).name}
+                  </a>
+                ))}
+              </div>
+            </div>
+            <a class="link" href="/contact#programare" data-fade>
+              Programează-te la {d.name} →
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+
+  <EndCta title="Nu știi la cine" italic="să te programezi?" text="Începe cu o evaluare. Te îndrumăm noi spre medicul potrivit pentru ce ai nevoie." />
+</Layout>
+
+<style>
+  .team {
+    display: grid;
+    gap: clamp(80px, 10vw, 160px);
+    padding-block: clamp(40px, 5vw, 80px) clamp(100px, 12vw, 180px);
+  }
+
+  .member {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(32px, 6vw, 110px);
+    align-items: center;
+    scroll-margin-top: 100px;
+  }
+
+  .member--rev .member__photo {
+    order: 2;
+  }
+
+  .member__photo {
+    aspect-ratio: 4 / 5;
+  }
+
+  .member__photo img {
+    object-position: 50% 14%;
+  }
+
+  .member__photo--cut {
+    background: linear-gradient(180deg, #e9dfd1, #dccdb8);
+  }
+
+  .member__photo--cut img {
+    mix-blend-mode: multiply;
+    object-position: 50% 30%;
+    transform: scale(1.5);
+    transform-origin: 50% 26%;
+  }
+
+  .member__text {
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+
+  .member__text .h1 {
+    font-size: clamp(2.4rem, 4.8vw, 5rem);
+  }
+
+  .member__role {
+    font-size: 1.05rem;
+  }
+
+  .member__quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+    line-height: 1.3;
+    max-width: 30ch;
+    padding-left: 20px;
+    border-left: 1px solid var(--terracotta);
+  }
+
+  .member__tr {
+    display: grid;
+    gap: 10px;
+  }
+
+  @media (max-width: 860px) {
+    .member {
+      grid-template-columns: 1fr;
+    }
+    .member--rev .member__photo {
+      order: 0;
+    }
+    .member__photo {
+      max-width: 420px;
+    }
+  }
+</style>

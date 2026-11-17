@@ -1,0 +1,1094 @@
+---
+import Layout from "@/layouts/Clinic.astro";
+import { CLINIC } from "@/consts.ts";
+import { COMPLETE } from "@/data/treatments.ts";
+
+const priority = [
+  {
+    n: "01",
+    name: "Parodontologie",
+    note: "Specialitatea noastră de bază",
+    text: "Gingii sănătoase înainte de orice altceva. Tratăm sângerările, retracțiile și boala parodontală cu un plan făcut pentru tine.",
+    img: "/img/g/exam.jpg",
+    href: "/tratamente/parodontologie",
+  },
+  {
+    n: "02",
+    name: "Estetică dentară",
+    note: "Fațete, albire, conturare",
+    text: "Un zâmbet care arată natural, pentru că pornește de la funcție. Întâi asanare, apoi estetică.",
+    img: "/img/g/lips.jpg",
+    href: "/tratamente/estetica-dentara",
+  },
+  {
+    n: "03",
+    name: "Injectări",
+    note: "Injection moulding",
+    text: "Restaurări estetice din compozit injectat, fără șlefuire agresivă și în mai puține ședințe.",
+    img: "/img/g/portrait-warm.jpg",
+    href: "/tratamente/injectari",
+  },
+  {
+    n: "04",
+    name: "Implantologie",
+    note: "Cu radiologie în clinică",
+    text: "De la planificarea digitală la coroana finală, în același loc și cu aceeași echipă.",
+    img: "/img/g/xray.jpg",
+    href: "/tratamente/implantologie",
+  },
+];
+
+const more = COMPLETE.map((t) => [t.name, `/tratamente/${t.slug}`]);
+
+const doctors = [
+  {
+    name: "Dr. Alexandra Birta",
+    role: "Estetică funcțională și protetică",
+    quote: "Un zâmbet frumos trebuie mai întâi să funcționeze. Abia apoi îl facem să arate bine.",
+    img: "/img/g/dr-alexandra.jpg",
+  },
+  {
+    name: "Dr. Bianca Tomina",
+    role: "Medic primar, chirurgie dento-alveolară",
+    quote: "Când pacientul înțelege ce urmează, frica dispare. Explic fiecare pas înainte să-l fac.",
+    img: "/img/g/dr-bianca.jpg",
+  },
+  {
+    name: "Dr. Darius Tomina",
+    role: "Medic primar, parodontologie",
+    quote: "Dintele e doar partea care se vede. Eu mă uit la ce îl ține pe loc.",
+    img: "/img/g/dr-darius.jpg",
+  },
+];
+
+const reviews = [
+  {
+    q: "Mi-a fost frică de dentist toată viața. Aici prima dată mi s-a explicat tot și nu m-am simțit grăbită.",
+    who: "Andreea M.",
+    what: "Parodontologie",
+  },
+  {
+    q: "Copiii mei vin acum de bunăvoie la control. Asta spune tot despre răbdarea echipei.",
+    who: "Radu P.",
+    what: "Pedodonție",
+  },
+  {
+    q: "Am primit un plan clar, cu etape și costuri, înainte să încep. Exact ce căutam.",
+    who: "Ioana C.",
+    what: "Implantologie",
+  },
+];
+
+const faqs = [
+  [
+    "Ce se întâmplă la prima vizită?",
+    "Facem o evaluare completă: discutăm ce te deranjează, examinăm dinții și gingiile și facem radiografiile necesare în clinică. Pleci cu un plan de tratament explicat, cu etape și costuri estimate.",
+  ],
+  [
+    "Pot plăti tratamentul în rate?",
+    "Da. Lucrăm cu Star BT și TBI Bank, așa că tratamentele mai ample se pot împărți în rate lunare.",
+  ],
+  [
+    "Am o urgență. Mă puteți primi repede?",
+    "Sună-ne direct. Păstrăm zilnic timp pentru urgențe și îți spunem la telefon când poți veni.",
+  ],
+  [
+    "Doare?",
+    "Lucrăm cu anestezie locală și îți explicăm fiecare pas înainte. Majoritatea pacienților ne spun că a fost mult mai ușor decât se așteptau.",
+  ],
+  [
+    "Unde parchez?",
+    "Suntem la 2 minute de Piața Unirii. Cele mai apropiate parcări sunt Piața Unirii și Primăria, iar stațiile de transport în comun sunt chiar în piață.",
+  ],
+];
+---
+
+<Layout>
+  <!-- ================= HERO A: manifest + fotografie ================= -->
+  <section class="hero hero--a frame" >
+    <div class="hero__media" data-parallax="0.12">
+      <img src="/img/g/hero-smile.jpg" alt="Femeie zâmbind, în lumină caldă" class="warm" fetchpriority="high" />
+    </div>
+    <div class="hero__shade"></div>
+
+    <div class="hero__content">
+      <p class="eyebrow hero__eyebrow" data-fade>Clinică stomatologică · Cluj-Napoca</p>
+      <h1 class="display hero__title" data-split>
+        Dintele e doar<br /><em>partea care</em><br />se vede.
+      </h1>
+
+      <div class="hero__bottom">
+        <p class="hero__lead" data-fade style="--d: 500ms">
+          Specialiști în parodontologie, estetică și implantologie. Un singur plan, gândit pentru tine, la 2 minute de
+          Piața Unirii.
+        </p>
+        <div class="hero__actions" data-fade style="--d: 700ms">
+          <a class="btn btn--light" href="/contact#programare">
+            Programează o evaluare <span class="dot" aria-hidden="true">↗</span>
+          </a>
+          <div class="hero__proof">
+            <div class="avatars avatars--initials" aria-label="Recenzii Google"><span>M</span><span>A</span><span>D</span></div>
+            <div>
+              <span class="stars">★★★★★</span>
+              <p class="small" style="color: inherit; opacity: 0.8">Recenzii Google · 3.000+ proceduri</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a class="hero__card" href="/tratamente/parodontologie" data-fade style="--d: 900ms">
+      <img src="/img/g/exam.jpg" alt="" />
+      <span>
+        <span class="small">Specialitatea noastră de bază</span>
+        <span class="hero__card-title">Parodontologie <span aria-hidden="true">→</span></span>
+      </span>
+    </a>
+  </section>
+
+  <!-- ================= MANIFEST ================= -->
+  <section class="section manifest" id="despre">
+    <div class="wrap manifest__grid">
+      <p class="eyebrow" data-fade>Despre noi</p>
+      <p class="manifest__text" data-lines>
+        <span class="ln">Am construit clinica</span>
+        <span class="ln">în jurul unei idei simple:</span>
+        <span class="ln">înainte să tratezi un dinte,</span>
+        <span class="ln"><em>asculți omul.</em></span>
+        <span class="ln">De la radiografie la ultimul control,</span>
+        <span class="ln">planul tău rămâne la aceeași echipă.</span>
+      </p>
+      <div class="manifest__img photo warm" data-img>
+        <img src="/img/g/consult.jpg" alt="Medic discutând cu o pacientă în cabinet" />
+      </div>
+      <div class="manifest__side" data-fade>
+        <p class="muted">
+          Esthetic Dental Center a pornit de la nevoile pacienților și ale medicilor deopotrivă. Echipa e
+          multidisciplinară, așa că un caz complex nu te mai trimite prin trei clinici.
+        </p>
+        <a class="link" href="/povestea-clinicii">Povestea clinicii →</a>
+      </div>
+    </div>
+
+    <div class="wrap stats">
+      {
+        [
+          ["15+", "ani de experiență"],
+          ["3.000+", "proceduri documentate"],
+          ["8", "specializări sub același acoperiș"],
+          ["2 min", "de Piața Unirii"],
+        ].map(([n, l], i) => (
+          <div class="stat" data-fade style={`--d:${i * 120}ms`}>
+            <span class="stat__n">{n}</span>
+            <span class="small">{l}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ================= SIGNATURE: Parodontologie ================= -->
+  <section class="sig">
+    <div class="wrap">
+      <p class="eyebrow" data-fade>Specialitatea noastră de bază</p>
+    </div>
+    <h2 class="sig__word" aria-label="Parodontologie">
+      <span data-fade>Paro</span><span class="sig__pill photo warm" data-img
+        ><img src="/img/g/exam.jpg" alt="" data-parallax="0.06" /></span
+      ><span data-fade style="--d:200ms"><em>dontologie</em></span>
+    </h2>
+    <div class="wrap sig__body">
+      <p class="lead" data-fade>
+        Sângerezi la periaj? Ai observat retracții? Nu e ceva cu care trebuie să trăiești.{" "}
+        <span style="color: var(--ink)">Se tratează, iar cu cât începi mai devreme, cu atât e mai simplu.</span>
+      </p>
+      <a class="btn" href="/tratamente/parodontologie" data-fade style="--d:200ms"
+        >Despre parodontologie <span class="dot" aria-hidden="true">→</span></a
+      >
+    </div>
+  </section>
+
+  <!-- ================= TRATAMENTE ================= -->
+  <section class="frame dark treat" id="tratamente">
+    <div class="wrap section">
+      <div class="treat__head">
+        <p class="eyebrow" data-fade>Tratamente</p>
+        <h2 class="h1" data-split>Întâi sănătatea.<br /><em>Apoi, estetica.</em></h2>
+        <p class="lead" data-fade>
+          Fiecare plan începe cu o evaluare completă și cu asanarea. Abia apoi construim zâmbetul pe care și-l dorește
+          pacientul. De la radiologie la tratamentul multidisciplinar, totul se face aici.
+        </p>
+      </div>
+
+      <ol class="treat__list">
+        {
+          priority.map((t) => (
+            <li data-fade>
+              <a href={t.href} class="treat__row">
+                <span class="treat__n small">{t.n}</span>
+                <span class="treat__name">{t.name}</span>
+                <span class="treat__text small">{t.text}</span>
+                <span class="treat__note small">{t.note}</span>
+                <span class="treat__thumb">
+                  <img src={t.img} alt="" />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="treat__more" data-fade>
+        <span class="small">Și tot ce mai e nevoie:</span>
+        {more.map(([m, h]) => <a class="tag" href={h}>{m}</a>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MEDICI ================= -->
+  <section class="section docs" id="medici">
+    <div class="wrap">
+      <div class="docs__head">
+        <p class="eyebrow" data-fade>Medicii fondatori</p>
+        <h2 class="h1" data-split>Medicii care<br /><em>chiar te ascultă.</em></h2>
+      </div>
+      <div class="docs__grid">
+        {
+          doctors.map((d, i) => (
+            <article class="doc" data-fade style={`--d:${i * 140}ms`}>
+              <div class="doc__photo photo">
+                <img src={d.img} alt={d.name} loading="lazy" />
+              </div>
+              <h3 class="h3">{d.name}</h3>
+              <p class="small">{d.role}</p>
+              <p class="doc__quote">„{d.quote}”</p>
+            </article>
+          ))
+        }
+      </div>
+      <p data-fade style="margin-top: clamp(40px, 5vw, 72px)">
+        <a class="btn btn--ghost" href="/echipa-medicala">Toată echipa medicală <span aria-hidden="true">→</span></a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= SENTIMENT ================= -->
+  <section class="feel frame">
+    <div class="feel__bg" data-parallax="0.1"><img src="/img/g/light-beam.jpg" alt="" /></div>
+    <div class="wrap feel__inner">
+      <p class="eyebrow" style="color: rgba(247,242,234,.7)" data-fade>Cum vrem să pleci de la noi</p>
+      <ul class="feel__list">
+        <li data-fade><em>În siguranță.</em><span>Știi că ești pe mâini de specialist.</span></li>
+        <li data-fade style="--d:150ms"><em>Ascultat.</em><span>Planul e gândit pentru tine, nu e un protocol.</span></li>
+        <li data-fade style="--d:300ms"><em>Încrezător.</em><span>Știi ce urmează și nu te mai sperie necunoscutul.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= SPAȚIUL ================= -->
+  <section class="section space" id="spatiul">
+    <div class="wrap space__grid">
+      <div class="space__head">
+        <p class="eyebrow" data-fade>Spațiul</p>
+        <h2 class="h1" data-split>Un loc în care<br /><em>respiri ușor.</em></h2>
+        <p class="muted" data-fade>
+          Un cabinet care funcționează de peste 20 de ani în centrul Clujului, transformat într-o clinică luminoasă, gândită
+          în jurul pacientului. Tehnologia e acolo unde ajută: radiologie internă și microscop pentru tratamentele de canal.
+        </p>
+      </div>
+      <figure class="space__main" data-img>
+        <img src="/img/g/receptie.jpg" alt="Recepția Esthetic Dental Center" loading="lazy" data-parallax="0.05" />
+      </figure>
+      <figure class="space__side" data-fade style="--d:200ms">
+        <div class="photo"><img src="/img/g/microscop-medic.jpg" alt="Tratament de canal la microscop" loading="lazy" /></div>
+        <figcaption><span class="serif">Endodonție la microscop.</span> Precizie pe care ochiul liber nu o are.</figcaption>
+      </figure>
+      <figcaption class="space__cap small" data-fade>Recepția, la 2 minute de Piața Unirii, lângă intrarea în Piața Muzeului.</figcaption>
+    </div>
+  </section>
+
+  <!-- ================= RECENZII ================= -->
+  <section class="section reviews">
+    <div class="wrap">
+      <div class="reviews__head">
+        <p class="eyebrow" data-fade>Recenzii</p>
+        <h2 class="h1" data-split>Ce spun <em class="nw">pacienții.</em></h2>
+        <p class="small" data-fade>Texte exemplificative pentru concept. Pe site vor fi recenziile reale.</p>
+      </div>
+      <div class="reviews__grid">
+        {
+          reviews.map((r, i) => (
+            <figure class="review" data-fade style={`--d:${i * 140}ms`}>
+              <span class="stars">★★★★★</span>
+              <blockquote>„{r.q}”</blockquote>
+              <figcaption>
+                <span>{r.who}</span>
+                <span class="small">{r.what}</span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section faqsec" id="intrebari" style="padding-top: 0">
+    <div class="wrap faqsec__grid">
+      <div>
+        <p class="eyebrow" data-fade>Întrebări frecvente</p>
+        <h2 class="h2" data-split style="margin-top: 20px">Înainte<br /><em>să suni.</em></h2>
+        <p class="muted" data-fade style="margin-top: 24px; max-width: 32ch">
+          Prețul final se stabilește după evaluare. Lista completă e pe <a class="link" href="/preturi">pagina de prețuri</a>.
+        </p>
+      </div>
+      <div class="faq" data-fade>
+        {
+          faqs.map(([q, a], i) => (
+            <details name="faq" open={i === 0}>
+              <summary>
+                {q}
+                <span class="pm" aria-hidden="true" />
+              </summary>
+              <p class="answer">{a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="cta frame" id="programare">
+    <div class="cta__img photo warm">
+      <img src="/img/g/patient-woman.jpg" alt="" loading="lazy" data-parallax="0.08" style="height:120%;margin-top:-10%" />
+    </div>
+    <div class="cta__body">
+      <p class="eyebrow" data-fade>Programare</p>
+      <h2 class="display cta__title" data-split>Primul pas<br />e o <em>conversație.</em></h2>
+      <p class="lead" data-fade>
+        La evaluare ne spui ce te deranjează. Noi îți explicăm ce vedem și ce opțiuni ai, fără să te grăbim.
+      </p>
+      <div class="cta__actions" data-fade>
+        <a class="btn" href="/contact#programare">Programează online <span class="dot" aria-hidden="true">↗</span></a>
+        <a class="btn btn--ghost" href={CLINIC.phoneHref}>{CLINIC.phone}</a>
+        <a class="btn btn--ghost" href={CLINIC.whatsapp}>WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+
+<style>
+  /* ---------- Hero A ---------- */
+  .hero {
+    min-height: calc(100svh - 2 * var(--frame));
+  }
+
+  .hero--a {
+    display: flex;
+    color: var(--paper);
+    background: var(--cacao);
+  }
+
+  .hero__media {
+    position: absolute;
+    inset: -8% 0;
+  }
+
+  .hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 62% 35%;
+    animation: heroZoom 2.8s var(--ease) both;
+  }
+
+  @keyframes heroZoom {
+    from {
+      transform: scale(1.14);
+      filter: sepia(0.18) saturate(0.92) brightness(0.6);
+    }
+  }
+
+  .hero__shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(31, 20, 14, 0.72) 0%, rgba(31, 20, 14, 0.25) 55%, rgba(31, 20, 14, 0) 80%),
+      linear-gradient(0deg, rgba(31, 20, 14, 0.65) 0%, rgba(31, 20, 14, 0) 45%);
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    padding: clamp(120px, 16vh, 180px) var(--gutter) clamp(28px, 4vw, 56px);
+  }
+
+  .hero__eyebrow {
+    color: rgba(247, 242, 234, 0.75);
+    margin-bottom: clamp(20px, 3vw, 36px);
+  }
+
+  .hero__title {
+    max-width: 12ch;
+  }
+
+  .hero__title em {
+    color: #f1d9c4;
+  }
+
+  .hero__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px 48px;
+    margin-top: clamp(28px, 4vw, 56px);
+  }
+
+  .hero__lead {
+    max-width: 38ch;
+    font-size: clamp(1rem, 1.2vw, 1.18rem);
+    color: rgba(247, 242, 234, 0.82);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 22px 28px;
+  }
+
+  .hero__proof {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .hero__proof .avatars img {
+    border-color: rgba(247, 242, 234, 0.9);
+  }
+
+  .hero__card {
+    position: absolute;
+    z-index: 2;
+    bottom: clamp(130px, 19vh, 190px);
+    right: var(--gutter);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 8px 20px 8px 8px;
+    border-radius: 22px;
+    background: rgba(247, 242, 234, 0.14);
+    border: 1px solid rgba(247, 242, 234, 0.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: background 0.4s;
+  }
+
+  .hero__card:hover {
+    background: rgba(247, 242, 234, 0.24);
+  }
+
+  .hero__card img {
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    object-fit: cover;
+  }
+
+  .hero__card > span {
+    display: grid;
+  }
+
+  .hero__card .small {
+    color: rgba(247, 242, 234, 0.7);
+    font-size: 0.78rem;
+  }
+
+  .hero__card-title {
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 760px) {
+    .hero__card {
+      display: none;
+    }
+    .hero__media img {
+      object-position: 70% 30%;
+    }
+  }
+
+  /* ---------- Manifest ---------- */
+  .manifest__grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 40px clamp(24px, 4vw, 64px);
+  }
+
+  .manifest__text {
+    grid-column: 2;
+    font-weight: 300;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    font-size: clamp(1.75rem, 3.6vw, 3.9rem);
+  }
+
+  @media (min-width: 861px) {
+    .manifest__text .ln {
+      white-space: nowrap;
+    }
+  }
+
+  .manifest__img {
+    grid-column: 1;
+    aspect-ratio: 4 / 5;
+    align-self: start;
+    margin-top: clamp(0px, 4vw, 60px);
+  }
+
+  .manifest__side {
+    grid-column: 2;
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+    max-width: 46ch;
+    margin-top: clamp(0px, 4vw, 60px);
+    margin-left: auto;
+  }
+
+  @media (max-width: 860px) {
+    .manifest__grid {
+      grid-template-columns: 1fr;
+    }
+    .manifest__text,
+    .manifest__img,
+    .manifest__side {
+      grid-column: 1;
+    }
+    .manifest__img {
+      max-width: 70%;
+    }
+    .manifest__side {
+      margin-left: 0;
+    }
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: clamp(80px, 10vw, 140px);
+  }
+
+  .stat {
+    display: grid;
+    gap: 6px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .stat__n {
+    font-size: clamp(2.6rem, 5vw, 4.6rem);
+    font-weight: 300;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  @media (max-width: 760px) {
+    .stats {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* ---------- Signature ---------- */
+  .sig {
+    padding-bottom: clamp(80px, 12vw, 180px);
+  }
+
+  .sig__word {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 0.06em;
+    margin: clamp(20px, 3vw, 40px) 0;
+    padding-inline: 8px;
+    font-weight: 300;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    font-size: clamp(2.8rem, 12.4vw, 13rem);
+    white-space: nowrap;
+  }
+
+  .sig__word em {
+    letter-spacing: -0.03em;
+    color: var(--terracotta);
+  }
+
+  .sig__pill {
+    display: inline-block;
+    width: 1.55em;
+    height: 0.82em;
+    border-radius: 999px !important;
+    flex: none;
+  }
+
+  .sig__pill img {
+    height: 130%;
+    margin-top: -15%;
+  }
+
+  .sig__body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+  }
+
+  .sig__body .lead {
+    max-width: 44ch;
+  }
+
+  /* ---------- Treatments ---------- */
+  .treat__head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 64px;
+    align-items: end;
+  }
+
+  .treat__head .eyebrow {
+    grid-column: 1 / -1;
+  }
+
+  .treat__head .lead {
+    max-width: 44ch;
+  }
+
+  @media (max-width: 860px) {
+    .treat__head {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .treat__list {
+    margin-top: clamp(56px, 7vw, 100px);
+    border-top: 1px solid rgba(239, 231, 219, 0.16);
+  }
+
+  .treat__row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 60px minmax(0, 1.5fr) minmax(0, 1.2fr) minmax(0, 0.8fr) 140px;
+    gap: 24px;
+    align-items: center;
+    padding: clamp(22px, 2.6vw, 36px) 0;
+    border-bottom: 1px solid rgba(239, 231, 219, 0.16);
+    transition: padding 0.7s var(--ease);
+  }
+
+  .treat__name {
+    font-size: clamp(1.9rem, 3.6vw, 3.8rem);
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    transition:
+      transform 0.7s var(--ease),
+      color 0.4s;
+  }
+
+  .treat__text {
+    max-width: 38ch;
+  }
+
+  .treat__note {
+    text-align: right;
+  }
+
+  .treat__thumb {
+    width: 140px;
+    height: 96px;
+    border-radius: 16px;
+    overflow: hidden;
+    opacity: 0.55;
+    filter: grayscale(0.6);
+    transition:
+      opacity 0.5s,
+      filter 0.5s,
+      transform 0.7s var(--ease);
+  }
+
+  .treat__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (hover: hover) and (min-width: 961px) {
+    .treat__row:hover .treat__thumb {
+      opacity: 1;
+      filter: none;
+      transform: scale(1.06) rotate(-2deg);
+    }
+
+    .treat__row:hover .treat__name {
+      transform: translateX(12px);
+      color: #f1d9c4;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .treat__row {
+      grid-template-columns: 36px 1fr 96px;
+      grid-template-areas:
+        "n name thumb"
+        "n text thumb";
+      gap: 8px 16px;
+    }
+    .treat__n {
+      grid-area: n;
+      align-self: start;
+      padding-top: 8px;
+    }
+    .treat__name {
+      grid-area: name;
+    }
+    .treat__text {
+      grid-area: text;
+    }
+    .treat__note {
+      display: none;
+    }
+    .treat__thumb {
+      grid-area: thumb;
+      width: 96px;
+      height: 72px;
+      opacity: 0.9;
+      filter: none;
+    }
+  }
+
+  .treat__more {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+  }
+
+  .treat__more .small {
+    margin-right: 8px;
+  }
+
+  .treat__more .tag:hover {
+    background: rgba(239, 231, 219, 0.08);
+  }
+
+  /* ---------- Doctors ---------- */
+  .docs__head {
+    display: grid;
+    gap: 20px;
+    margin-bottom: clamp(48px, 6vw, 88px);
+  }
+
+  .docs__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2vw, 32px);
+  }
+
+  .doc__photo {
+    aspect-ratio: 4 / 5;
+    margin-bottom: 22px;
+  }
+
+  .doc__photo img {
+    object-position: 50% 12%;
+    transition:
+      transform 1.4s var(--ease),
+      filter 0.8s;
+  }
+
+  .doc:hover .doc__photo img {
+    transform: scale(1.04);
+    filter: grayscale(0) sepia(0.12);
+  }
+
+  .doc:nth-child(2) {
+    margin-top: clamp(0px, 6vw, 96px);
+  }
+
+  .doc .h3 {
+    margin-bottom: 4px;
+  }
+
+  .doc__quote {
+    margin-top: 16px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.2rem, 1.5vw, 1.45rem);
+    line-height: 1.3;
+    max-width: 30ch;
+  }
+
+  @media (max-width: 860px) {
+    .docs__grid {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+    .doc:nth-child(2) {
+      margin-top: 0;
+    }
+  }
+
+  /* ---------- Feel ---------- */
+  .feel {
+    color: var(--paper);
+    background: var(--cacao);
+    min-height: 90svh;
+    display: flex;
+    align-items: center;
+  }
+
+  .feel__bg {
+    position: absolute;
+    inset: -12% 0;
+  }
+
+  .feel__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feel__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(43, 32, 26, 0.78) 0%, rgba(43, 32, 26, 0.45) 55%, rgba(43, 32, 26, 0.15) 100%);
+  }
+
+  .feel__inner {
+    position: relative;
+    padding-block: clamp(80px, 10vw, 140px);
+  }
+
+  .feel__list {
+    margin-top: 40px;
+    display: grid;
+    gap: clamp(18px, 2.4vw, 36px);
+  }
+
+  .feel__list li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 32px;
+  }
+
+  .feel__list em {
+    font-size: clamp(3rem, 8vw, 8.6rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .feel__list span {
+    max-width: 26ch;
+    color: rgba(247, 242, 234, 0.75);
+  }
+
+  /* ---------- Space ---------- */
+  .space__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.9fr;
+    grid-template-areas:
+      "head head head"
+      "main main side"
+      "cap cap .";
+    gap: 28px clamp(16px, 2.4vw, 36px);
+    align-items: end;
+  }
+
+  .space__head {
+    grid-area: head;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 20px clamp(32px, 6vw, 110px);
+    align-items: end;
+    margin-bottom: clamp(24px, 4vw, 56px);
+  }
+
+  .space__head .eyebrow {
+    grid-column: 1 / -1;
+  }
+
+  .space__head p {
+    max-width: 46ch;
+  }
+
+  @media (max-width: 860px) {
+    .space__head {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .space__main {
+    grid-area: main;
+    margin: 0;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: var(--radius);
+  }
+
+  .space__main img {
+    width: 100%;
+    height: 112%;
+    margin-top: -6%;
+    object-fit: cover;
+  }
+
+  .space__side {
+    grid-area: side;
+    margin: 0;
+    align-self: end;
+  }
+
+  .space__side .photo {
+    aspect-ratio: 2 / 3;
+  }
+
+  .space__side figcaption {
+    margin-top: 14px;
+    color: var(--muted);
+    max-width: 34ch;
+  }
+
+  .space__side .serif {
+    color: var(--ink);
+    font-size: 1.2em;
+  }
+
+  .space__cap {
+    grid-area: cap;
+  }
+
+  @media (max-width: 860px) {
+    .space__grid {
+      grid-template-columns: 1fr;
+      grid-template-areas: "head" "main" "cap" "side";
+    }
+    .space__side {
+      max-width: 70%;
+      justify-self: end;
+    }
+  }
+
+  /* ---------- Reviews ---------- */
+  .reviews__head {
+    display: grid;
+    gap: 20px;
+    margin-bottom: clamp(48px, 6vw, 80px);
+  }
+
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .review {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: clamp(28px, 3vw, 44px);
+    border-radius: var(--radius);
+    background: var(--bone);
+    min-height: 360px;
+  }
+
+  .review blockquote {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 1.9vw, 1.9rem);
+    line-height: 1.22;
+    flex: 1;
+  }
+
+  .review figcaption {
+    display: grid;
+  }
+
+  @media (max-width: 860px) {
+    .reviews__grid {
+      grid-template-columns: 1fr;
+    }
+    .review {
+      min-height: 0;
+    }
+  }
+
+  /* ---------- FAQ ---------- */
+  .faqsec__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 48px clamp(32px, 6vw, 120px);
+  }
+
+  @media (max-width: 860px) {
+    .faqsec__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- CTA ---------- */
+  .cta {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    background: var(--sand);
+    min-height: 88svh;
+  }
+
+  .cta__img {
+    border-radius: 0;
+    min-height: 420px;
+  }
+
+  .cta__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    padding: clamp(48px, 7vw, 120px) var(--gutter);
+  }
+
+  .cta__title {
+    font-size: clamp(3rem, 6.6vw, 7.6rem);
+    max-width: 10ch;
+  }
+
+  .cta__title em {
+    color: var(--terracotta);
+  }
+
+  .cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media (max-width: 860px) {
+    .cta {
+      grid-template-columns: 1fr;
+    }
+    .cta__img {
+      min-height: 340px;
+    }
+  }
+</style>

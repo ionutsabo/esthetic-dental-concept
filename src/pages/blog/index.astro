@@ -1,0 +1,150 @@
+---
+import Layout from "@/layouts/Clinic.astro";
+import PostCard from "@/components/site/PostCard.astro";
+import EndCta from "@/components/site/EndCta.astro";
+import blog from "@/data/blog.json";
+
+const posts = [...blog].sort((a, b) => b.date.localeCompare(a.date));
+const [first, ...rest] = posts;
+const cats = ["Cazuri clinice", ...new Set(posts.flatMap((p) => p.cats).filter((c) => c !== "Cazuri clinice"))];
+const date = (d: string) => new Date(d).toLocaleDateString("ro-RO", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<Layout title="Blog" description="Articole scrise de medicii Esthetic Dental Center: cazuri clinice, sfaturi și explicații despre tratamente." navInk>
+  <section class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb" data-fade><a href="/">Acasă</a><span>/</span><span aria-current="page">Blog</span></nav>
+      <h1 class="phead__title phead__title--md" data-split>Ca să știi <em>dinainte.</em></h1>
+      <div class="phead__row">
+        <p class="lead" data-fade style="--d:300ms">
+          Cazuri clinice reale și răspunsuri la întrebările pe care ni le pun pacienții. Scrise de medicii noștri,
+          <span class="serif" style="color:var(--ink)">pe înțelesul tuturor.</span>
+        </p>
+      </div>
+      <div class="chips" role="group" aria-label="Filtrează articolele" data-fade style="--d:450ms">
+        <button type="button" aria-pressed="true" data-chip="">Toate <span>{posts.length}</span></button>
+        {
+          cats.map((c) => (
+            <button type="button" aria-pressed="false" data-chip={c}>
+              {c} <span>{posts.filter((p) => p.cats.includes(c)).length}</span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- primul articol, mare -->
+  <section class="wrap" data-post data-cats={first.cats.join("|")}>
+    <a class="lead-post" href={`/blog/${first.slug}`}>
+      <div class="lead-post__img photo" data-img>{first.image && <img src={first.image} alt="" />}</div>
+      <div class="lead-post__text">
+        <div class="post__meta">
+          <span class="k">{first.isCase ? "Caz clinic" : first.cats[0]}</span>
+          <span>{date(first.date)}</span>
+          <span>{first.minutes} min de citit</span>
+        </div>
+        <h2 class="h2">{first.title}</h2>
+        <p class="muted">{first.excerpt}</p>
+        {first.author && <p class="small">de {first.author}</p>}
+        <span class="link">Citește articolul →</span>
+      </div>
+    </a>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="posts">
+        {
+          rest.map((p, i) => (
+            <div data-post data-cats={p.cats.join("|")}>
+              <PostCard p={p} delay={(i % 3) * 100} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <EndCta title="Ai o întrebare" italic="care nu e aici?" text="Întreab-o la evaluare. Sau scrie-ne pe WhatsApp, îți răspunde un medic." />
+</Layout>
+
+<script>
+  const chips = [...document.querySelectorAll<HTMLButtonElement>("[data-chip]")];
+  const items = [...document.querySelectorAll<HTMLElement>("[data-post]")];
+  chips.forEach((c) =>
+    c.addEventListener("click", () => {
+      const v = c.dataset.chip!;
+      chips.forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
+      items.forEach((it) => (it.hidden = !!v && !(it.dataset.cats || "").split("|").includes(v)));
+    }),
+  );
+</script>
+
+<style>
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: clamp(28px, 3vw, 44px);
+  }
+
+  .chips button {
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    font-size: 0.9rem;
+    transition:
+      background 0.3s,
+      color 0.3s;
+  }
+
+  .chips button span {
+    margin-left: 4px;
+    color: var(--muted);
+    font-size: 0.8em;
+  }
+
+  .chips button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .chips button[aria-pressed="true"] span {
+    color: inherit;
+    opacity: 0.6;
+  }
+
+  .lead-post {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: clamp(28px, 5vw, 80px);
+    align-items: center;
+  }
+
+  .lead-post__img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .lead-post__text {
+    display: grid;
+    gap: 18px;
+    justify-items: start;
+  }
+
+  .lead-post:hover .h2 {
+    color: var(--terracotta);
+  }
+
+  .lead-post .h2 {
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    transition: color 0.3s;
+  }
+
+  @media (max-width: 860px) {
+    .lead-post {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

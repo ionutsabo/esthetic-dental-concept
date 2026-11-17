@@ -1,0 +1,16 @@
+---
+import Legal from "@/components/site/Legal.astro";
+const sections: [string, string][] = [
+  ["Ce sunt cookie-urile", "O explicație pe scurt, pe înțelesul oricui."],
+  ["Cookie-uri necesare", "Cele fără de care site-ul nu funcționează, inclusiv cel care ține minte alegerea ta privind cookie-urile. Nu cer acord."],
+  ["Cookie-uri de analiză", "Google Analytics 4, folosit doar cu acordul tău, ca să înțelegem ce pagini ajută pacienții."],
+  ["Cookie-uri de marketing", "Pixelul Meta, pentru campanii, folosit doar cu acordul tău."],
+  ["Conținut de la terți", "Google Maps și videourile încorporate setează cookie-uri proprii. Le încărcăm doar după acord."],
+  ["Lista completă a cookie-urilor", "Tabelul cu numele, furnizorul, scopul și durata fiecărui cookie. Se completează după auditul tehnic al site-ului."],
+  ["Cum îți schimbi alegerea", "Oricând, din butonul „Setări cookie” din subsolul fiecărei pagini."],
+];
+---
+
+<Legal title="Politica de cookie-uri" titleA="Politica de" titleB="cookie-uri" intro="Ce cookie-uri folosim, de ce, și cum îți schimbi alegerea oricând." sections={sections}>
+  <p><button type="button" class="btn" data-cookie-open>Deschide setările cookie <span class="dot" aria-hidden="true">↗</span></button></p>
+</Legal>

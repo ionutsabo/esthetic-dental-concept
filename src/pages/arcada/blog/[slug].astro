@@ -1,0 +1,10 @@
+---
+import Page from "../../blog/[slug].astro";
+import blog from "@/data/blog.json";
+
+export function getStaticPaths() {
+  return blog.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+---
+
+<Page {...Astro.props} />

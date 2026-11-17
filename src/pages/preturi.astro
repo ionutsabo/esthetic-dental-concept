@@ -1,0 +1,255 @@
+---
+import Layout from "@/layouts/Clinic.astro";
+import Faq from "@/components/site/Faq.astro";
+import EndCta from "@/components/site/EndCta.astro";
+import { PRICES } from "@/data/prices.ts";
+
+const total = PRICES.reduce((n, c) => n + c.items.length, 0);
+
+const faqs: [string, string][] = [
+  ["Prețurile includ toate etapele tratamentului?", "Prețurile afișate sunt pentru procedura de bază. Medicul îți explică la evaluare dacă sunt necesare etape suplimentare, iar înainte de tratament primești devizul complet."],
+  ["De ce diferă prețul de la un pacient la altul?", "Pentru că fiecare caz are altă complexitate. O carie superficială costă mai puțin decât una profundă, iar un implant poate avea nevoie sau nu de reconstrucție osoasă."],
+  ["Pot afla prețul exact fără consultație?", "Putem oferi o estimare, dar prețul final se stabilește doar după ce medicul vede situația reală. E singura metodă corectă pentru tine."],
+  ["Pot plăti orice tratament în rate?", "Majoritatea tratamentelor, da, prin Star BT și TBI Bank. Îți explicăm opțiunile la recepție sau la evaluare."],
+  ["Consultația e obligatorie înainte de tratament?", "Da. E esențială pentru un diagnostic corect și pentru un plan de tratament potrivit pentru tine."],
+];
+---
+
+<Layout title="Prețuri" description="Prețurile Esthetic Dental Center pentru tratamente stomatologice, pe specializări. Plată în rate prin Star BT și TBI Bank." navInk>
+  <section class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb" data-fade><a href="/">Acasă</a><span>/</span><span aria-current="page">Prețuri</span></nav>
+      <h1 class="phead__title" data-split>Prețuri <em>clare.</em></h1>
+      <div class="phead__row">
+        <p class="lead" data-fade style="--d:300ms">
+          Credem că fiecare pacient merită să știe costurile din timp. Prețul final se stabilește după evaluare,
+          <span class="serif" style="color:var(--ink)">iar devizul îl primești înainte să începem.</span>
+        </p>
+        <div class="tags" data-fade style="--d:450ms">
+          <span class="tag">{total} de proceduri</span>
+          <span class="tag">{PRICES.length} categorii</span>
+          <span class="tag">Plată în rate</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- rate -->
+  <section class="wrap">
+    <div class="rate" data-fade>
+      <div>
+        <p class="eyebrow">Plata în rate</p>
+        <p class="rate__t">Tratamentul tău, <em>împărțit lunar.</em></p>
+      </div>
+      <p>
+        Pentru planurile de tratament mai ample, poți plăti în rate lunare prin <strong>Star BT</strong> sau <strong>TBI Bank</strong>.
+        Îți explicăm condițiile la evaluare sau la recepție, înainte să iei orice decizie.
+      </p>
+      <div class="rate__banks" aria-label="Parteneri">
+        <span>Star BT</span>
+        <span>TBI Bank</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- lista -->
+  <section class="section">
+    <div class="wrap plist">
+      <aside class="plist__side">
+        <label class="field" for="psearch">
+          <span class="small">Caută un tratament</span>
+          <input id="psearch" type="search" placeholder="ex. implant, albire, igienizare" autocomplete="off" data-psearch />
+        </label>
+        <nav class="plist__cats" aria-label="Categorii de prețuri">
+          {PRICES.map((c) => <a href={`#${c.id}`}>{c.label} <span>{c.items.length}</span></a>)}
+        </nav>
+        <p class="note">Prețurile sunt orientative și pot varia în funcție de complexitatea cazului. <strong>Prețul final se stabilește după evaluare.</strong></p>
+      </aside>
+      <div class="plist__main">
+        {
+          PRICES.map((c) => (
+            <section class="pcat" id={c.id} data-pcat>
+              <h2 class="h3">{c.label}</h2>
+              <table class="ptable">
+                <tbody>
+                  {c.items.map((i) => (
+                    <tr data-prow>
+                      <td>{i.t}</td>
+                      <td>{i.d ?? ""}</td>
+                      <td>{i.p}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          ))
+        }
+        <p class="muted" data-pempty hidden>Nu am găsit nimic. Încearcă alt cuvânt sau <a class="link" href="/contact">întreabă-ne direct</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow" data-fade>Întrebări despre prețuri</p>
+        <h2 class="h2" data-split>Fără <em>surprize.</em></h2>
+      </div>
+      <Faq items={faqs} />
+    </div>
+  </section>
+
+  <EndCta title="Vrei un preț" italic="pentru cazul tău?" text="Programează o evaluare. Pleci cu planul de tratament și cu devizul complet, fără nicio obligație." />
+</Layout>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>("[data-psearch]");
+  const cats = [...document.querySelectorAll<HTMLElement>("[data-pcat]")];
+  const empty = document.querySelector<HTMLElement>("[data-pempty]");
+  const norm = (s: string) =>
+    s
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .toLowerCase();
+  input?.addEventListener("input", () => {
+    const q = norm(input.value.trim());
+    let any = false;
+    cats.forEach((c) => {
+      let n = 0;
+      c.querySelectorAll<HTMLElement>("[data-prow]").forEach((r) => {
+        const ok = !q || norm(r.textContent || "").includes(q);
+        r.hidden = !ok;
+        if (ok) n++;
+      });
+      c.hidden = n === 0;
+      if (n) any = true;
+    });
+    if (empty) empty.hidden = any;
+  });
+</script>
+
+<style>
+  .rate {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr auto;
+    gap: 24px 48px;
+    align-items: center;
+    padding: clamp(28px, 4vw, 56px);
+    border-radius: var(--radius);
+    background: var(--cacao);
+    color: var(--bone);
+  }
+
+  .rate .eyebrow {
+    color: rgba(239, 231, 219, 0.6);
+  }
+
+  .rate__t {
+    margin-top: 12px;
+    font-weight: 300;
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+  }
+
+  .rate__t em {
+    color: #f1d9c4;
+  }
+
+  .rate p:not(.eyebrow):not(.rate__t) {
+    color: rgba(239, 231, 219, 0.75);
+  }
+
+  .rate strong {
+    font-weight: 500;
+    color: var(--bone);
+  }
+
+  .rate__banks {
+    display: grid;
+    gap: 8px;
+  }
+
+  .rate__banks span {
+    padding: 12px 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(239, 231, 219, 0.25);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 960px) {
+    .rate {
+      grid-template-columns: 1fr;
+    }
+    .rate__banks {
+      grid-auto-flow: column;
+      justify-content: start;
+    }
+  }
+
+  .plist {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+  }
+
+  .plist__side {
+    position: sticky;
+    top: 110px;
+    display: grid;
+    gap: 24px;
+  }
+
+  .plist__cats {
+    display: grid;
+  }
+
+  .plist__cats a {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+    transition: color 0.3s;
+  }
+
+  .plist__cats a:hover {
+    color: var(--terracotta);
+  }
+
+  .plist__cats span {
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  .plist__main {
+    display: grid;
+    gap: clamp(48px, 6vw, 80px);
+  }
+
+  .pcat {
+    scroll-margin-top: 110px;
+  }
+
+  .pcat .h3 {
+    margin-bottom: 12px;
+    font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+    font-weight: 300;
+    letter-spacing: -0.035em;
+  }
+
+  @media (max-width: 960px) {
+    .plist {
+      grid-template-columns: 1fr;
+    }
+    .plist__side {
+      position: static;
+    }
+    .plist__cats {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 20px;
+    }
+  }
+</style>

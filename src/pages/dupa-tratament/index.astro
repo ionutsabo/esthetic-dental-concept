@@ -1,0 +1,84 @@
+---
+/** Indexul instrucțiunilor de după tratament. Nu apare în meniu și nici în Google. */
+import Layout from "@/layouts/Clinic.astro";
+
+const items = [
+  ["extractie", "După extracție", true],
+  ["implant", "După inserarea unui implant", false],
+  ["chirurgie-parodontala", "După chirurgie parodontală", false],
+  ["tratament-de-canal", "După tratamentul de canal", false],
+  ["igienizare", "După igienizare și detartraj", false],
+  ["albire", "După albirea dentară", false],
+  ["fatete-si-injectari", "După fațete sau injectări", false],
+  ["aparat-dentar", "Primele zile cu aparatul dentar", false],
+] as const;
+---
+
+<Layout title="După tratament" description="Instrucțiuni pentru acasă, după tratament." navInk>
+  <section class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb" data-fade><a href="/">Acasă</a><span>/</span><span aria-current="page">După tratament</span></nav>
+      <h1 class="phead__title phead__title--md" data-split>Grijă și <em>acasă.</em></h1>
+      <div class="phead__row">
+        <p class="lead" data-fade style="--d:300ms">
+          Ce urmează după tratament, cum îngrijești zona și când să ne suni. Le primești de la recepție pe WhatsApp sau prin codul QR de
+          la plecare.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom: clamp(100px, 12vw, 180px)">
+    <ul class="list">
+      {
+        items.map(([s, t, ready]) => (
+          <li data-fade>
+            {ready ? (
+              <a href={`/dupa-tratament/${s}`}>
+                <span class="list__t">{t}</span>
+                <span class="tag">Gata</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            ) : (
+              <div>
+                <span class="list__t muted">{t}</span>
+                <span class="tag">În lucru, etapa 2</span>
+                <span />
+              </div>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+    <p class="note" style="margin-top: 32px; max-width: 64ch">
+      <strong>Pentru clinică:</strong> paginile acestea nu apar în meniu și au <code>noindex</code>, ca să nu apară în Google. Fiecare are
+      aceeași structură: ce urmează, cum îngrijești zona, ce eviți, când ne suni și videoul medicului.
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .list {
+    border-top: 1px solid var(--line);
+  }
+
+  .list a,
+  .list div {
+    display: grid;
+    grid-template-columns: 1fr auto 24px;
+    gap: 20px;
+    align-items: center;
+    padding: clamp(18px, 2.2vw, 28px) 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .list__t {
+    font-size: clamp(1.4rem, 2.4vw, 2.2rem);
+    font-weight: 300;
+    letter-spacing: -0.035em;
+  }
+
+  .list a:hover .list__t {
+    color: var(--terracotta);
+  }
+</style>

@@ -1,0 +1,25 @@
+---
+import Layout from "@/layouts/Clinic.astro";
+import { PRIORITY } from "@/data/treatments.ts";
+import { CLINIC } from "@/consts.ts";
+---
+
+<Layout title="Pagina nu există" navInk>
+  <section class="phead" style="min-height: 80svh">
+    <div class="wrap">
+      <p class="eyebrow" data-fade>Eroare 404</p>
+      <h1 class="phead__title phead__title--md" data-split>Pagina asta <em>a rămas fără zâmbet.</em></h1>
+      <div class="phead__row">
+        <p class="lead" data-fade>Adresa nu mai există sau s-a mutat. Poate te ajută una dintre astea:</p>
+      </div>
+      <div class="tags" data-fade style="margin-top: 32px">
+        <a class="tag" href="/">Acasă</a>
+        {PRIORITY.map((t) => <a class="tag" href={`/tratamente/${t.slug}`}>{t.name}</a>)}
+        <a class="tag" href="/preturi">Prețuri</a>
+        <a class="tag" href="/contact">Contact</a>
+        <a class="tag" href="/harta-site">Toate paginile</a>
+      </div>
+      <p class="muted" data-fade style="margin-top: 32px">Sau sună-ne direct: <a class="link" href={CLINIC.phoneHref}>{CLINIC.phone}</a></p>
+    </div>
+  </section>
+</Layout>

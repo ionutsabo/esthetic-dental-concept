@@ -1,0 +1,23 @@
+---
+import { CLINIC } from "@/consts.ts";
+type Props = { title?: string; italic?: string; text?: string };
+const {
+  title = "Primul pas",
+  italic = "e o conversație.",
+  text = "La evaluare ne spui ce te deranjează. Noi îți explicăm ce vedem și ce opțiuni ai, fără să te grăbim.",
+} = Astro.props;
+---
+
+<section class="frame dark">
+  <div class="endcta">
+    <div>
+      <p class="eyebrow" data-fade>Programare</p>
+      <h2 class="display" data-split style="margin-top: 20px">{title}<br /><em>{italic}</em></h2>
+      <p class="lead" data-fade style="margin-top: 24px">{text}</p>
+    </div>
+    <div class="endcta__actions" data-fade>
+      <a class="btn btn--light" href="/contact#programare">Programează o evaluare <span class="dot" aria-hidden="true">↗</span></a>
+      <a class="btn btn--ghost" href={CLINIC.phoneHref}>{CLINIC.phone}</a>
+    </div>
+  </div>
+</section>

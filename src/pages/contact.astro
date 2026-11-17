@@ -1,0 +1,330 @@
+---
+import Layout from "@/layouts/Clinic.astro";
+import { CLINIC } from "@/consts.ts";
+
+const reasons = [
+  "O evaluare completă",
+  "Durere sau urgență",
+  "Gingii (sângerări, retracții)",
+  "Estetică dentară, fațete, injectări",
+  "Implant dentar",
+  "Aparat dentar",
+  "Pentru copilul meu",
+  "Altceva",
+];
+const mapUrl = "https://www.google.com/maps?q=Esthetic+Dental+Center+Cluj-Napoca&output=embed";
+const mapLink = "https://www.google.com/maps/search/?api=1&query=Esthetic+Dental+Center+Cluj-Napoca";
+---
+
+<Layout title="Contact și programări" description="Programează-te la Esthetic Dental Center, Cluj-Napoca: telefon, WhatsApp, formular, program și indicații de acces." navInk>
+  <section class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb" data-fade><a href="/">Acasă</a><span>/</span><span aria-current="page">Contact</span></nav>
+      <h1 class="phead__title" data-split>Hai să <em>vorbim.</em></h1>
+      <div class="phead__row">
+        <p class="lead" data-fade style="--d:300ms">
+          Sună-ne, scrie-ne pe WhatsApp sau lasă-ne câteva detalii aici.
+          <span class="serif" style="color:var(--ink)">Te contactăm noi, repede.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap contact" id="programare">
+    <div class="contact__info">
+      <div class="contact__block" data-fade>
+        <p class="eyebrow">Telefon și WhatsApp</p>
+        <a class="contact__big" href={CLINIC.phoneHref}>{CLINIC.phone}</a>
+        <div class="contact__actions">
+          <a class="btn" href={CLINIC.phoneHref}>Sună acum <span class="dot" aria-hidden="true">↗</span></a>
+          <a class="btn btn--ghost" href={CLINIC.whatsapp}>Scrie pe WhatsApp</a>
+        </div>
+        <p class="note"><strong>Ai o urgență sau o durere?</strong> Nu completa formularul, sună-ne direct. Îți spunem la telefon cât de repede te putem primi.</p>
+      </div>
+      <div class="contact__block" data-fade>
+        <p class="eyebrow">Email</p>
+        <a class="link" href={`mailto:${CLINIC.email}`}>{CLINIC.email}</a>
+      </div>
+      <div class="contact__block" data-fade>
+        <p class="eyebrow">Program</p>
+        <ul class="hours">
+          {
+            CLINIC.hours.map(([d, h]) => (
+              <li>
+                <span>{d}</span>
+                <span>{h}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <form class="form contact__form" data-form novalidate>
+      <p class="h3">Cere o programare</p>
+      <p class="muted" style="margin-top: -8px">Completezi în 30 de secunde. Te sunăm noi pentru o oră potrivită.</p>
+      <div class="form__row">
+        <div class="field">
+          <label for="f-name">Nume și prenume *</label>
+          <input id="f-name" name="name" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="f-phone">Telefon *</label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" />
+      </div>
+      <fieldset class="field reasons">
+        <legend class="small">Ce te aduce la noi?</legend>
+        <div class="reasons__list">
+          {
+            reasons.map((r, i) => (
+              <label class="reason">
+                <input type="radio" name="reason" value={r} checked={i === 0} />
+                <span>{r}</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+      <div class="field">
+        <label for="f-msg">Mesaj</label>
+        <textarea id="f-msg" name="message" placeholder="Opțional: spune-ne pe scurt ce te deranjează sau când ți-ar fi comod să vii."></textarea>
+      </div>
+      <label class="check">
+        <input type="checkbox" name="gdpr" required />
+        <span>Sunt de acord ca Esthetic Dental Center să îmi prelucreze datele pentru a mă contacta în legătură cu această solicitare. Detalii în <a class="link" href="/politica-de-confidentialitate">politica de confidențialitate</a>. *</span>
+      </label>
+      <label class="check">
+        <input type="checkbox" name="marketing" />
+        <span>Vreau să primesc noutăți și informații utile de la clinică (opțional).</span>
+      </label>
+      <button class="btn" type="submit" style="justify-self:start">Trimite cererea <span class="dot" aria-hidden="true">↗</span></button>
+      <p class="form__ok note" hidden data-form-ok><strong>Mulțumim!</strong> Cererea a ajuns la noi. Te sunăm în cel mai scurt timp, în programul clinicii. <em>(Concept: formularul nu trimite încă date.)</em></p>
+      <p class="form__err small" hidden data-form-err>Completează numele, telefonul și acordul pentru prelucrarea datelor.</p>
+    </form>
+  </section>
+
+  <!-- locație -->
+  <section class="section">
+    <div class="wrap">
+      <div class="split" style="margin-bottom: clamp(40px, 5vw, 64px)">
+        <div>
+          <p class="eyebrow" data-fade>Locație</p>
+          <h2 class="h1" data-split>La 2 minute de <em>Piața Unirii.</em></h2>
+        </div>
+        <p class="lead" data-fade style="align-self:end">{CLINIC.address}. La nevoie, te ghidăm telefonic când ajungi.</p>
+      </div>
+      <div class="loc">
+        <div class="embed" data-embed={mapUrl} data-title="Harta: Esthetic Dental Center" data-fade>
+          <div>
+            <p class="h3">Harta</p>
+            <p>Harta e oferită de Google și folosește cookie-uri. O încărcăm doar dacă ești de acord.</p>
+            <button class="btn" type="button">Încarcă harta <span class="dot" aria-hidden="true">↗</span></button>
+            <p><a class="link" href={mapLink} target="_blank" rel="noopener">sau deschide în Google Maps</a></p>
+          </div>
+        </div>
+        <ul class="ways">
+          <li data-fade>
+            <span class="ways__k">Cu mașina</span>
+            <p>Parchezi în parcarea din Piața Unirii sau în parcarea Primăriei. Clinica e la 2 minute de mers pe jos, lângă intrarea în Piața Muzeului.</p>
+          </li>
+          <li data-fade style="--d:120ms">
+            <span class="ways__k">Cu transportul în comun</span>
+            <p>Toate liniile cu stație în Piața Unirii te aduc aproape de clinică.</p>
+          </li>
+          <li data-fade style="--d:240ms">
+            <span class="ways__k">Pe rețelele sociale</span>
+            <p>
+              <a class="link" href={CLINIC.social.instagram}>Instagram</a> · <a class="link" href={CLINIC.social.facebook}>Facebook</a> ·
+              <a class="link" href={CLINIC.social.tiktok}>TikTok</a> · <a class="link" href={CLINIC.social.youtube}>YouTube</a>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-form]");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const ok = form.checkValidity();
+    form.querySelector<HTMLElement>("[data-form-err]")!.hidden = ok;
+    if (!ok) return;
+    form.querySelector<HTMLElement>("[data-form-ok]")!.hidden = false;
+    form.querySelector<HTMLButtonElement>("button[type=submit]")!.disabled = true;
+  });
+</script>
+
+<style>
+  .contact {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(40px, 6vw, 110px);
+    align-items: start;
+    padding-bottom: clamp(60px, 8vw, 120px);
+    scroll-margin-top: 100px;
+  }
+
+  .contact__info {
+    display: grid;
+    gap: 40px;
+  }
+
+  .contact__block {
+    display: grid;
+    gap: 14px;
+    justify-items: start;
+  }
+
+  .contact__big {
+    font-weight: 300;
+    font-size: clamp(2.4rem, 5vw, 4.6rem);
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+
+  .contact__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .hours {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .hours li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact__form {
+    padding: clamp(24px, 4vw, 48px);
+    border-radius: var(--radius);
+    background: var(--bone);
+  }
+
+  .form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .reasons {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .reasons legend {
+    margin-bottom: 10px;
+    color: var(--muted);
+  }
+
+  .reasons__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .reason {
+    position: relative;
+  }
+
+  .reason input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .contact > *,
+  .form > *,
+  .form__row > * {
+    min-width: 0;
+  }
+
+  .reason span {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition:
+      background 0.3s,
+      color 0.3s;
+  }
+
+  .reason input:checked + span {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .reason input:focus-visible + span {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 2px;
+  }
+
+  .form__err {
+    color: #a3422b;
+  }
+
+  @media (max-width: 960px) {
+    .contact {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .form__row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .loc {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(24px, 4vw, 64px);
+    align-items: start;
+  }
+
+  .ways {
+    border-top: 1px solid var(--line);
+  }
+
+  .ways li {
+    display: grid;
+    gap: 6px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .ways__k {
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .ways p {
+    color: var(--muted);
+  }
+
+  @media (max-width: 860px) {
+    .loc {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

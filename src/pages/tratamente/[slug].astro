@@ -1,0 +1,264 @@
+---
+/**
+ * Pagina de specializare: aceeași structură pentru toate tratamentele
+ * (Parodontologie are pagină proprie, cu design special).
+ */
+import Layout from "@/layouts/Clinic.astro";
+import Faq from "@/components/site/Faq.astro";
+import EndCta from "@/components/site/EndCta.astro";
+import DoctorCard from "@/components/site/DoctorCard.astro";
+import PostCard from "@/components/site/PostCard.astro";
+import TreatMedia from "@/components/site/TreatMedia.astro";
+import { TREATMENTS, type Treatment } from "@/data/treatments.ts";
+import { doctorBySlug } from "@/data/doctors.ts";
+import { pickPrices } from "@/data/prices.ts";
+import blog from "@/data/blog.json";
+
+export function getStaticPaths() {
+  return TREATMENTS.filter((t) => !t.bespoke).map((t) => ({ params: { slug: t.slug }, props: { t } }));
+}
+
+const { t } = Astro.props as { t: Treatment };
+const doctors = t.doctors.map(doctorBySlug);
+const prices = pickPrices(t.prices);
+const posts = blog.filter((p) => p.treatment === t.slug).slice(0, 3);
+const others = TREATMENTS.filter((x) => x.slug !== t.slug && (x.group === "prioritar" || x.group === t.group)).slice(0, 5);
+const joined = /^(logie|donție|dontologie)$/.test(t.titleB);
+const long = (t.titleA + t.titleB).length > 18;
+---
+
+<Layout title={t.name} description={`${t.name} la Esthetic Dental Center, Cluj-Napoca. ${t.short}`} navInk>
+  <section class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb" data-fade>
+        <a href="/">Acasă</a><span>/</span><a href="/tratamente">Tratamente</a><span>/</span><span aria-current="page">{t.name}</span>
+      </nav>
+      <h1 class:list={["phead__title", long && "phead__title--md"]} data-split>
+        {joined ? <>{t.titleA}<em>{t.titleB}</em></> : <>{t.titleA} <em>{t.titleB}</em></>}
+      </h1>
+      <div class="phead__row">
+        <p class="lead" data-fade style="--d:300ms">{t.lead}</p>
+      </div>
+    </div>
+  </section>
+
+  <TreatMedia t={t} />
+
+  <!-- când ai nevoie -->
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow" data-fade>Când ai nevoie</p>
+        <h2 class="h1" data-split>Ți se <em>întâmplă?</em></h2>
+      </div>
+      <div>
+        <ul class="numlist">
+          {
+            t.signs.map((s, i) => (
+              <li data-fade style={`--d:${i * 90}ms`}>
+                <span class="small">0{i + 1}</span>
+                {s}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="calm" data-fade>{t.calm}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ce este -->
+  <section class="frame dark">
+    <div class="wrap section what">
+      <div>
+        <p class="eyebrow" data-fade>Ce este</p>
+        <h2 class="h2" data-split style="margin-top: 20px">{t.name}, <em>pe scurt.</em></h2>
+      </div>
+      <p class="lead" data-fade>{t.what}</p>
+      <div>
+        <p class="eyebrow" data-fade>Cum se face</p>
+      </div>
+      <p class="muted" data-fade>{t.how}</p>
+    </div>
+  </section>
+
+  <!-- tratamente incluse -->
+  <section class="section">
+    <div class="wrap">
+      <div style="display:grid; gap:20px; margin-bottom: clamp(48px, 6vw, 88px)">
+        <p class="eyebrow" data-fade>Ce include</p>
+        <h2 class="h1" data-split>Tratamente <em>incluse.</em></h2>
+      </div>
+      <ol class="grid3">
+        {
+          t.procedures.map(([n, d], i) => (
+            <li data-fade style={`--d:${(i % 3) * 120}ms`}>
+              <span class="grid3__n">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="h3">{n}</h3>
+              <p class="muted">{d}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- pași -->
+  <section class="frame bone">
+    <div class="wrap section">
+      <div style="display:grid; gap:20px; margin-bottom: clamp(56px, 7vw, 100px)">
+        <p class="eyebrow" data-fade>Cum decurge</p>
+        <h2 class="h1" data-split>Pas cu pas, <em>fără surprize.</em></h2>
+      </div>
+      <ol class="steps4">
+        {
+          t.steps.map(([n, d], i) => (
+            <li data-fade style={`--d:${i * 140}ms`}>
+              <span class="small">Pasul {i + 1}</span>
+              <h3 class="h3">{n}</h3>
+              <p class="muted">{d}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- prețuri -->
+  {
+    prices.length > 0 && (
+      <section class="section">
+        <div class="wrap split">
+          <div>
+            <p class="eyebrow" data-fade>Prețuri orientative</p>
+            <h2 class="h2" data-split>
+              Cât <em>costă?</em>
+            </h2>
+            <p class="muted" data-fade style="max-width: 34ch">
+              Prețul final se stabilește după evaluare, în funcție de cazul tău. Poți plăti în rate, prin Star BT și TBI Bank.
+            </p>
+            <a class="link" href={`/preturi#${prices[0].catId}`} data-fade>
+              Toate prețurile →
+            </a>
+          </div>
+          <table class="ptable" data-fade>
+            <tbody>
+              {prices.map((p) => (
+                <tr>
+                  <td>{p.t}</td>
+                  <td>{p.d ?? ""}</td>
+                  <td>{p.p}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- medici -->
+  <section class:list={["section", prices.length > 0 && "pt0"]}>
+    <div class="wrap">
+      <div style="display:grid; gap:20px; margin-bottom: clamp(48px, 6vw, 80px)">
+        <p class="eyebrow" data-fade>{doctors.length > 1 ? "Medicii" : "Medicul"} care te tratează</p>
+        <h2 class="h1" data-split>Pe mâini <em>bune.</em></h2>
+      </div>
+      <div class="cols3">{doctors.map((d, i) => <DoctorCard d={d} delay={i * 140} />)}</div>
+    </div>
+  </section>
+
+  <!-- articole -->
+  {
+    posts.length > 0 && (
+      <section class="section pt0">
+        <div class="wrap">
+          <div class="split" style="margin-bottom: clamp(40px, 5vw, 64px)">
+            <div>
+              <p class="eyebrow" data-fade>Din blog</p>
+              <h2 class="h2" data-split>
+                Ca să știi <em>dinainte.</em>
+              </h2>
+            </div>
+          </div>
+          <div class="posts">{posts.map((p, i) => <PostCard p={p} delay={i * 120} />)}</div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- FAQ -->
+  <section class="section pt0">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow" data-fade>Întrebări frecvente</p>
+        <h2 class="h2" data-split>Ce ne întreabă <em>pacienții.</em></h2>
+      </div>
+      <Faq items={t.faqs} />
+    </div>
+  </section>
+
+  <!-- alte tratamente -->
+  <section class="wrap others" data-fade>
+    <span class="small">Alte tratamente</span>
+    <div class="tags">
+      {others.map((o) => <a class="tag" href={`/tratamente/${o.slug}`}>{o.name}</a>)}
+      <a class="tag" href="/tratamente">Toate →</a>
+    </div>
+  </section>
+
+  <EndCta />
+</Layout>
+
+<style>
+  .pt0 {
+    padding-top: 0;
+  }
+
+  .calm {
+    margin-top: clamp(40px, 5vw, 72px);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 2.4vw, 2.4rem);
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+    max-width: 30ch;
+  }
+
+  .what {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 40px clamp(32px, 6vw, 120px);
+  }
+
+  .what .lead {
+    max-width: 52ch;
+    color: var(--bone);
+  }
+
+  @media (max-width: 860px) {
+    .what {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .cols3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(32px, 3vw, 48px) clamp(16px, 2vw, 32px);
+  }
+
+  @media (max-width: 860px) {
+    .cols3 {
+      grid-template-columns: 1fr;
+      max-width: 460px;
+    }
+  }
+
+  .others {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 20px;
+    padding-bottom: clamp(60px, 8vw, 110px);
+  }
+</style>

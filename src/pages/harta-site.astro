@@ -1,0 +1,222 @@
+---
+/** Harta site-ului: toate paginile, cu link, grupate pe etape. */
+import Layout from "@/layouts/Clinic.astro";
+import { PRIORITY, COMPLETE } from "@/data/treatments.ts";
+import blog from "@/data/blog.json";
+
+type Row = { href: string; t: string; note?: string; tag?: "păstrat" | "nou" | "intern" };
+type Group = { k: string; title: string; desc: string; rows: Row[] };
+
+const posts = [...blog].sort((a, b) => b.date.localeCompare(a.date));
+
+const groups: Group[] = [
+  {
+    k: "Etapa 1",
+    title: "Paginile principale",
+    desc: "Ce intră la lansare. Adresele existente rămân aceleași.",
+    rows: [
+      { href: "/", t: "Acasă", tag: "păstrat" },
+      { href: "/povestea-clinicii", t: "Despre noi", note: "povestea, valorile, medicii, spațiul", tag: "păstrat" },
+      { href: "/echipa-medicala", t: "Echipa medicală", note: "toți cei 6 medici", tag: "păstrat" },
+      { href: "/tratamente", t: "Tratamente", note: "cum construim planul + toate specializările", tag: "păstrat" },
+      { href: "/preturi", t: "Prețuri", note: "176 de poziții reale, căutare, plata în rate", tag: "păstrat" },
+      { href: "/contact", t: "Contact", note: "formular, telefon, WhatsApp, hartă, acces", tag: "păstrat" },
+    ],
+  },
+  {
+    k: "Etapa 1",
+    title: "Specializări",
+    desc: "O pagină pentru fiecare tratament, pe aceeași structură. Primele patru sunt direcțiile prioritare din brief.",
+    rows: [
+      ...PRIORITY.map((t) => ({
+        href: `/tratamente/${t.slug}`,
+        t: t.name,
+        note: t.bespoke ? "design special" : t.badge.toLowerCase(),
+        tag: (["estetica-dentara", "injectari"].includes(t.slug) ? "nou" : "păstrat") as Row["tag"],
+      })),
+      ...COMPLETE.map((t) => ({ href: `/tratamente/${t.slug}`, t: t.name, tag: "păstrat" as const })),
+    ],
+  },
+  {
+    k: "Etapa 1",
+    title: "Pagini legale",
+    desc: "Structura e gata. Textele le redactează avocatul.",
+    rows: [
+      { href: "/termeni-si-conditii", t: "Termeni și condiții", tag: "păstrat" },
+      { href: "/politica-de-confidentialitate", t: "Politica de confidențialitate", tag: "păstrat" },
+      { href: "/politica-cookie", t: "Politica de cookie-uri", note: "+ bannerul de consimțământ", tag: "păstrat" },
+    ],
+  },
+  {
+    k: "Etapa 2",
+    title: "Blog și cazuri clinice",
+    desc: "Toate cele 12 articole reale, migrate cu aceleași adrese. Fiecare trimite spre tratamentul despre care vorbește.",
+    rows: [
+      { href: "/blog", t: "Blog", note: "filtre pe categorii", tag: "păstrat" },
+      { href: "/cazuri-clinice", t: "Cazuri clinice", note: "cele 4 cazuri, într-o pagină", tag: "nou" },
+      ...posts.map((p) => ({ href: `/blog/${p.slug}`, t: p.title, note: p.isCase ? "caz clinic" : p.cats[0]?.toLowerCase(), tag: "păstrat" as const })),
+    ],
+  },
+  {
+    k: "Etapa 2",
+    title: "După tratament",
+    desc: "Nu apar în meniu și nici în Google. Recepția le trimite pe WhatsApp sau prin cod QR.",
+    rows: [
+      { href: "/dupa-tratament", t: "Toate instrucțiunile", tag: "intern" },
+      { href: "/dupa-tratament/extractie", t: "După extracție", note: "exemplul complet", tag: "intern" },
+    ],
+  },
+  {
+    k: "Utilitare",
+    title: "Pentru noi",
+    desc: "Pagini de lucru, care nu fac parte din site-ul final.",
+    rows: [
+      { href: "/concepte", t: "Variantele de design", tag: "intern" },
+      { href: "/varianta-3", t: "Varianta Arcada, pe închis", tag: "intern" },
+      { href: "/varianta-3-light", t: "Varianta Arcada, pe deschis", tag: "intern" },
+      { href: "/pagina-care-nu-exista", t: "Pagina 404", tag: "intern" },
+    ],
+  },
+];
+
+const total = groups.reduce((n, g) => n + g.rows.length, 0);
+---
+
+<Layout title="Harta site-ului" description="Toate paginile site-ului Esthetic Dental Center." navInk>
+  <section class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb" data-fade><a href="/">Acasă</a><span>/</span><span aria-current="page">Harta site-ului</span></nav>
+      <h1 class="phead__title phead__title--md" data-split>Harta <em>site-ului.</em></h1>
+      <div class="phead__row">
+        <p class="lead" data-fade>Toate paginile, într-un singur loc. {total} de linkuri, grupate pe etapele din propunere.</p>
+        <div class="tags" data-fade>
+          <span class="tag"><i class="dot-k dot-k--p"></i> URL păstrat</span>
+          <span class="tag"><i class="dot-k dot-k--n"></i> pagină nouă</span>
+          <span class="tag"><i class="dot-k dot-k--i"></i> intern</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap map">
+    {
+      groups.map((g) => (
+        <div class="map__g">
+          <div class="map__head" data-fade>
+            <p class="eyebrow">{g.k}</p>
+            <h2 class="h2">{g.title}</h2>
+            <p class="muted">{g.desc}</p>
+          </div>
+          <ul class="map__list">
+            {g.rows.map((r) => (
+              <li>
+                <a href={r.href}>
+                  <span class="map__t">{r.t}</span>
+                  <span class="map__u">{r.href}</span>
+                  <span class="map__n small">{r.note ?? ""}</span>
+                  <i class:list={["dot-k", r.tag === "nou" && "dot-k--n", r.tag === "păstrat" && "dot-k--p", r.tag === "intern" && "dot-k--i"]} title={r.tag} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </section>
+</Layout>
+
+<style>
+  .map {
+    display: grid;
+    gap: clamp(64px, 8vw, 120px);
+    padding-bottom: clamp(100px, 12vw, 180px);
+  }
+
+  .map__g {
+    display: grid;
+    grid-template-columns: 0.8fr 1.6fr;
+    gap: 32px clamp(32px, 6vw, 110px);
+  }
+
+  .map__head {
+    display: grid;
+    gap: 14px;
+    align-content: start;
+  }
+
+  .map__list {
+    border-top: 1px solid var(--line);
+  }
+
+  .map__list a {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr) minmax(0, 0.8fr) 12px;
+    gap: 16px;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .map__t {
+    font-size: 1.1rem;
+    letter-spacing: -0.015em;
+    transition: color 0.3s;
+  }
+
+  .map__list a:hover .map__t {
+    color: var(--terracotta);
+  }
+
+  .map__u {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.76rem;
+    color: var(--muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .dot-k {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--clay);
+  }
+
+  .dot-k--p {
+    background: var(--sage);
+  }
+
+  .dot-k--n {
+    background: var(--terracotta);
+  }
+
+  .dot-k--i {
+    background: transparent;
+    border: 1px solid var(--muted);
+  }
+
+  @media (max-width: 960px) {
+    .map__g {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .map__list a {
+      grid-template-columns: 1fr 12px;
+      gap: 4px 12px;
+    }
+    .map__u {
+      grid-column: 1;
+    }
+    .map__n {
+      display: none;
+    }
+    .dot-k {
+      grid-row: 1;
+      grid-column: 2;
+    }
+  }
+</style>

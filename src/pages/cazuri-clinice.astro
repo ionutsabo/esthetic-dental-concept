@@ -1,0 +1,138 @@
+---
+import Layout from "@/layouts/Clinic.astro";
+import EndCta from "@/components/site/EndCta.astro";
+import blog from "@/data/blog.json";
+import { treatmentBySlug } from "@/data/treatments.ts";
+
+const cases = blog.filter((p) => p.isCase).sort((a, b) => b.date.localeCompare(a.date));
+---
+
+<Layout title="Cazuri clinice" description="Cazuri clinice reale de la Esthetic Dental Center, documentate cu acordul pacienților și explicate pe înțeles." navInk>
+  <section class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb" data-fade><a href="/">Acasă</a><span>/</span><span aria-current="page">Cazuri clinice</span></nav>
+      <h1 class="phead__title" data-split>Cazuri <em>clinice</em></h1>
+      <div class="phead__row">
+        <p class="lead" data-fade style="--d:300ms">
+          Pacienți reali, tratamente reale. Fiecare caz e explicat pas cu pas,
+          <span class="serif" style="color:var(--ink)">ca să înțelegi ce e posibil și cum se ajunge acolo.</span>
+        </p>
+        <div class="tags" data-fade style="--d:450ms">
+          <span class="tag">Publicate cu acord scris</span>
+          <span class="tag">{cases.length} cazuri</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap cases">
+    {
+      cases.map((c, i) => {
+        const t = c.treatment ? treatmentBySlug(c.treatment) : null;
+        return (
+          <a class:list={["case", i % 2 && "case--rev"]} href={`/blog/${c.slug}`}>
+            <div class="case__img photo" data-img>
+              {c.image && <img src={c.image} alt="" loading="lazy" />}
+            </div>
+            <div class="case__text">
+              <span class="case__n serif">Caz {String(i + 1).padStart(2, "0")}</span>
+              <h2 class="h2">{c.title}</h2>
+              <p class="muted">{c.excerpt}</p>
+              <div class="tags">
+                {t && <span class="tag">{t.name}</span>}
+                {c.author && <span class="tag">{c.author}</span>}
+              </div>
+              <span class="link">Vezi cazul →</span>
+            </div>
+          </a>
+        );
+      })
+    }
+  </section>
+
+  <section class="frame bone">
+    <div class="wrap section how">
+      <div>
+        <p class="eyebrow" data-fade>Cum documentăm un caz</p>
+        <h2 class="h2" data-split>Cu acordul tău, <em>întotdeauna.</em></h2>
+      </div>
+      <ol class="numlist">
+        <li data-fade><span class="small">01</span>Orice caz apare public doar cu acordul scris al pacientului, explicit pentru acest scop.</li>
+        <li data-fade style="--d:90ms"><span class="small">02</span>Fotografiile sunt făcute la început, pe parcurs și la final, în aceleași condiții.</li>
+        <li data-fade style="--d:180ms"><span class="small">03</span>Explicăm fiecare etapă pe înțeles, fără promisiuni și fără rezultate „garantate”.</li>
+      </ol>
+    </div>
+  </section>
+
+  <EndCta title="Te recunoști" italic="într-un caz?" text="Programează o evaluare. Îți spunem sincer ce e posibil în situația ta." />
+</Layout>
+
+<style>
+  .cases {
+    display: grid;
+    gap: clamp(64px, 8vw, 130px);
+    padding-block: clamp(20px, 3vw, 40px) clamp(100px, 12vw, 180px);
+  }
+
+  .case {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(28px, 5vw, 90px);
+    align-items: center;
+  }
+
+  .case--rev .case__img {
+    order: 2;
+  }
+
+  .case__img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .case__text {
+    display: grid;
+    gap: 18px;
+    justify-items: start;
+  }
+
+  .case__n {
+    font-size: 1.4rem;
+    color: var(--terracotta);
+  }
+
+  .case:hover .h2 {
+    color: var(--terracotta);
+  }
+
+  .case .h2 {
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    transition: color 0.3s;
+  }
+
+  @media (max-width: 860px) {
+    .case {
+      grid-template-columns: 1fr;
+    }
+    .case--rev .case__img {
+      order: 0;
+    }
+  }
+
+  .how {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 40px clamp(32px, 6vw, 120px);
+  }
+
+  .how > div {
+    display: grid;
+    gap: 20px;
+    align-content: start;
+  }
+
+  @media (max-width: 860px) {
+    .how {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

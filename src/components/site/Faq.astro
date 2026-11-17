@@ -1,0 +1,18 @@
+---
+type Props = { items: [string, string][]; name?: string };
+const { items, name = "faq" } = Astro.props;
+---
+
+<div class="faq" data-fade>
+  {
+    items.map(([q, a], i) => (
+      <details name={name} open={i === 0}>
+        <summary>
+          {q}
+          <span class="pm" aria-hidden="true" />
+        </summary>
+        <p class="answer">{a}</p>
+      </details>
+    ))
+  }
+</div>

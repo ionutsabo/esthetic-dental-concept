@@ -1,0 +1,50 @@
+---
+/**
+ * Layout minimal pentru variantele de homepage: fiecare pagină își aduce
+ * propriul nav, footer și propria tipografie. Aici stau doar head-ul,
+ * bara de programare pe mobil și scriptul de mișcare comun.
+ */
+import "@/styles/clinic.css";
+import { SITE_NAME, SITE_DESCRIPTION, CLINIC } from "@/consts.ts";
+
+type Props = {
+  title?: string;
+  description?: string;
+  /** URL Google Fonts pentru varianta respectivă. */
+  fonts: string;
+  bodyClass?: string;
+};
+
+const { title, description = SITE_DESCRIPTION, fonts, bodyClass } = Astro.props;
+const pageTitle = title ? `${title} · ${SITE_NAME}` : SITE_NAME;
+---
+
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/img/brand/simbol.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href={fonts} rel="stylesheet" />
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body class={bodyClass}>
+    <slot />
+
+    <div class="mobilebar">
+      <a href={CLINIC.phoneHref}>Sună</a>
+      <a class="primary" href="#programare">Programează-te</a>
+    </div>
+
+    <script>
+      import "@/scripts/motion.ts";
+    </script>
+  </body>
+</html>

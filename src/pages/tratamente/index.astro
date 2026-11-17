@@ -1,0 +1,284 @@
+---
+import Layout from "@/layouts/Clinic.astro";
+import Faq from "@/components/site/Faq.astro";
+import EndCta from "@/components/site/EndCta.astro";
+import { PRIORITY, COMPLETE } from "@/data/treatments.ts";
+import ArchMap from "@/components/v3/ArchMap.astro";
+import { isArc } from "@/utils/path.ts";
+
+const arc = isArc(Astro.url);
+
+const steps = [
+  ["Evaluare", "Discutăm ce te deranjează, examinăm și facem radiografiile necesare, direct în clinică."],
+  ["Plan scris", "Primești planul explicat pe înțeles: etape, număr de ședințe, costuri estimate."],
+  ["Tratament", "Fiecare etapă e făcută de medicul specializat în ea, în aceeași clinică."],
+  ["Control", "Revii la control, ca rezultatul să rămână în timp."],
+];
+
+const faqs: [string, string][] = [
+  ["Cât durează un tratament?", "Depinde de ce ai nevoie. O plombă se face într-o ședință, un implant durează câteva luni. După evaluare, primești un calendar clar, cu fiecare etapă."],
+  ["Doare?", "Lucrăm cu anestezie locală și îți explicăm fiecare pas înainte. Majoritatea pacienților ne spun că a fost mult mai ușor decât se așteptau."],
+  ["De ce începeți cu igienizarea și cu gingiile?", "Pentru că orice lucrare (fațetă, coroană, implant) rezistă doar pe o bază sănătoasă. Asanarea vine înaintea esteticii."],
+  ["Cum arată recuperarea?", "Pentru majoritatea tratamentelor, revii la activitățile obișnuite în aceeași zi. După intervențiile chirurgicale primești instrucțiuni scrise și un link cu tot ce ai de făcut acasă."],
+  ["Pot plăti în rate?", "Da, prin Star BT și TBI Bank. Îți explicăm opțiunile la evaluare."],
+];
+---
+
+<Layout title="Tratamente" description="Tratamentele Esthetic Dental Center: parodontologie, estetică dentară, injectări, implantologie și toate specializările stomatologiei." navInk>
+  <section class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb" data-fade><a href="/">Acasă</a><span>/</span><span aria-current="page">Tratamente</span></nav>
+      <h1 class="phead__title phead__title--md" data-split>Întâi sănătatea.<br /><em>Apoi, estetica.</em></h1>
+      <div class="phead__row">
+        <p class="lead" data-fade style="--d:300ms">
+          De la o igienizare la un tratament complex, coordonat între mai mulți specialiști. <span class="serif" style="color:var(--ink)">Totul se face aici.</span>
+        </p>
+        <div class="tags" data-fade style="--d:450ms">
+          <span class="tag">10 specializări</span>
+          <span class="tag">Radiologie internă</span>
+          <span class="tag">Plată în rate</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    arc && (
+      <section class="arcmap-sec">
+        <div class="wrap">
+          <ArchMap />
+        </div>
+      </section>
+    )
+  }
+
+  <!-- cum construim planul -->
+  <section class="section" style="padding-top: clamp(40px, 5vw, 80px)">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow" data-fade>Cum construim planul</p>
+        <h2 class="h2" data-split>Un plan, <em>nu o listă de proceduri.</em></h2>
+      </div>
+      <div class="prose" style="max-width: 60ch">
+        <p data-fade>
+          Fiecare tratament începe cu o evaluare completă: dinții, gingiile, osul și felul în care funcționează mușcătura. Avem
+          radiologie în clinică, așa că nu trebuie să mergi nicăieri altundeva.
+        </p>
+        <p data-fade>
+          Cazurile simple se rezolvă de obicei în una-două ședințe. Pentru cele complexe, medicii se consultă între ei și construiesc
+          un singur plan, în care fiecare etapă e făcută de specialistul potrivit. Tu ai un singur loc și un singur plan, de la
+          diagnostic până la ultimul control.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- prioritare -->
+  <section class="wrap">
+    <div class="prio">
+      {
+        PRIORITY.map((t, i) => (
+          <a class="prio__card" href={`/tratamente/${t.slug}`} data-fade style={`--d:${(i % 2) * 140}ms`}>
+            <div class="prio__img photo">
+              <img src={t.img} alt="" loading="lazy" style={t.imgPos ? `object-position:${t.imgPos}` : undefined} />
+              <span class="prio__badge">{t.badge}</span>
+            </div>
+            <span class="prio__name">
+              {t.titleA}
+              <em>{t.titleB === "dontologie" || t.titleB === "logie" ? t.titleB : ` ${t.titleB}`}</em>
+            </span>
+            <span class="prio__short">{t.short}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- complete -->
+  <section class="section">
+    <div class="wrap">
+      <div class="split" style="margin-bottom: clamp(32px, 4vw, 56px)">
+        <div>
+          <p class="eyebrow" data-fade>Și tot ce mai e nevoie</p>
+          <h2 class="h2" data-split>Toate specializările, <em>sub același acoperiș.</em></h2>
+        </div>
+      </div>
+      <ul class="rows">
+        {
+          COMPLETE.map((t) => (
+            <li data-fade>
+              <a href={`/tratamente/${t.slug}`}>
+                <span class="rows__name">{t.name}</span>
+                <span class="rows__short">{t.short}</span>
+                <span class="rows__badge small">{t.badge}</span>
+                <span class="rows__arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- proces -->
+  <section class="frame bone">
+    <div class="wrap section">
+      <div style="display:grid; gap:20px; margin-bottom: clamp(56px, 7vw, 100px)">
+        <p class="eyebrow" data-fade>Cum decurge</p>
+        <h2 class="h1" data-split>Patru pași. <em>Fără surprize.</em></h2>
+      </div>
+      <ol class="steps4">
+        {
+          steps.map(([t, d], i) => (
+            <li data-fade style={`--d:${i * 140}ms`}>
+              <span class="small">Pasul {i + 1}</span>
+              <h3 class="h3">{t}</h3>
+              <p class="muted">{d}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow" data-fade>Întrebări despre tratamente</p>
+        <h2 class="h2" data-split>Durată, durere, <em>recuperare.</em></h2>
+        <p class="muted" data-fade style="max-width: 32ch">Prețurile orientative sunt pe <a class="link" href="/preturi">pagina de prețuri</a>.</p>
+      </div>
+      <Faq items={faqs} />
+    </div>
+  </section>
+
+  <EndCta />
+</Layout>
+
+<style>
+  .prio {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 5vw, 72px) clamp(16px, 2vw, 32px);
+  }
+
+  .prio__card {
+    display: grid;
+    gap: 12px;
+  }
+
+  .prio__card:nth-child(even) {
+    margin-top: clamp(0px, 8vw, 120px);
+  }
+
+  .prio__img {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    margin-bottom: 10px;
+  }
+
+  .prio__img img {
+    transition: transform 1.4s var(--ease);
+  }
+
+  .prio__card:hover .prio__img img {
+    transform: scale(1.04);
+  }
+
+  .prio__badge {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(247, 242, 234, 0.92);
+    font-size: 0.8rem;
+  }
+
+  .prio__name {
+    font-weight: 300;
+    font-size: clamp(2.2rem, 4.2vw, 4.4rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .prio__name em {
+    color: var(--terracotta);
+    letter-spacing: -0.02em;
+  }
+
+  .prio__short {
+    max-width: 44ch;
+    color: var(--muted);
+  }
+
+  @media (max-width: 760px) {
+    .prio {
+      grid-template-columns: 1fr;
+    }
+    .prio__card:nth-child(even) {
+      margin-top: 0;
+    }
+  }
+
+  .rows {
+    border-top: 1px solid var(--line);
+  }
+
+  .rows a {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr) minmax(0, 0.7fr) 30px;
+    gap: 24px;
+    align-items: baseline;
+    padding: clamp(20px, 2.4vw, 32px) 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .rows__name {
+    font-size: clamp(1.5rem, 2.4vw, 2.4rem);
+    font-weight: 300;
+    letter-spacing: -0.035em;
+    transition:
+      transform 0.6s var(--ease),
+      color 0.3s;
+  }
+
+  .rows__short {
+    color: var(--muted);
+  }
+
+  .rows__badge {
+    text-align: right;
+  }
+
+  .rows__arrow {
+    justify-self: end;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .rows a:hover .rows__name {
+    transform: translateX(10px);
+    color: var(--terracotta);
+  }
+
+  .rows a:hover .rows__arrow {
+    transform: translateX(6px);
+  }
+
+  @media (max-width: 860px) {
+    .rows a {
+      grid-template-columns: 1fr 24px;
+      gap: 6px 12px;
+    }
+    .rows__short {
+      grid-column: 1;
+    }
+    .rows__badge {
+      display: none;
+    }
+    .rows__arrow {
+      grid-row: 1;
+      grid-column: 2;
+    }
+  }
+</style>

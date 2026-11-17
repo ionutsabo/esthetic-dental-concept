@@ -1,0 +1,205 @@
+---
+/**
+ * Imaginea de sub titlul unei pagini de tratament, alături de fișa „Pe scurt”.
+ * Imaginea își păstrează aproape proporția originală (3:2 sau 2:3), ca să nu fie tăiată
+ * nefericit; fișa ține faptele care înainte erau etichete sub titlu.
+ */
+import type { Treatment } from "@/data/treatments.ts";
+import { doctorBySlug } from "@/data/doctors.ts";
+
+type Props = { t: Treatment; alt?: string };
+const { t, alt = "" } = Astro.props;
+const doctors = t.doctors.map(doctorBySlug);
+const first = t.steps[0]?.[0];
+const last = t.steps.at(-1)?.[0];
+---
+
+<section class:list={["tmedia", t.imgTall && "tmedia--tall", !t.img && "tmedia--noimg"]}>
+  <div class="wrap tmedia__grid">
+    {
+      t.img && (
+        <figure class="tmedia__img photo" data-img>
+          <img src={t.img} alt={alt} data-parallax="0.04" style={t.imgPos ? `object-position:${t.imgPos}` : undefined} />
+        </figure>
+      )
+    }
+    <aside class="tmedia__card" data-fade style="--d:200ms" aria-label="Pe scurt">
+      <p class="eyebrow">Pe scurt</p>
+      <dl class="tmedia__facts">
+        <div>
+          <dt>De reținut</dt>
+          <dd>{t.badge}</dd>
+        </div>
+        <div>
+          <dt>{doctors.length > 1 ? "Medicii" : "Medicul"}</dt>
+          <dd class="tmedia__docs">
+            {
+              doctors.map((d) => (
+                <a href={`/echipa-medicala#${d.slug}`}>
+                  <img src={d.img} alt="" loading="lazy" />
+                  {d.name}
+                </a>
+              ))
+            }
+          </dd>
+        </div>
+        {
+          first && last && (
+            <div>
+              <dt>Cum decurge</dt>
+              <dd>
+                {t.steps.length} etape, de la <span class="lc">{first}</span> la <span class="lc">{last}</span>
+              </dd>
+            </div>
+          )
+        }
+        <div>
+          <dt>Diagnostic</dt>
+          <dd>Radiologie în clinică, fără drumuri în plus</dd>
+        </div>
+        <div>
+          <dt>Plată</dt>
+          <dd>Integral sau în rate, prin Star BT și TBI Bank</dd>
+        </div>
+      </dl>
+      <a class="btn" href="/contact#programare">Programează o evaluare <span class="dot" aria-hidden="true">↗</span></a>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .tmedia {
+    padding-bottom: clamp(72px, 9vw, 140px);
+  }
+
+  .tmedia__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(16px, 2vw, 32px);
+    align-items: end;
+  }
+
+  /* imagine lată (3:2): 8 coloane, ușor mai înaltă decât originalul */
+  .tmedia__img {
+    grid-column: 1 / 9;
+    aspect-ratio: 5 / 4;
+    margin: 0;
+  }
+
+  /* portret (2:3): 5 coloane */
+  .tmedia--tall .tmedia__img {
+    grid-column: 1 / 6;
+    aspect-ratio: 3 / 4;
+  }
+
+  .tmedia__img img {
+    height: 108%;
+    margin-top: -4%;
+  }
+
+  .tmedia__card {
+    grid-column: 9 / 13;
+    display: grid;
+    gap: 22px;
+    align-content: end;
+  }
+
+  .tmedia--tall .tmedia__card {
+    grid-column: 7 / 13;
+    max-width: 520px;
+  }
+
+  .tmedia__facts {
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .tmedia__facts > div {
+    display: grid;
+    gap: 4px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tmedia__facts dt {
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .tmedia__facts dd {
+    margin: 0;
+    font-size: 1.02rem;
+    line-height: 1.4;
+  }
+
+  .lc {
+    text-transform: lowercase;
+  }
+
+  .tmedia__docs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    padding-top: 4px;
+  }
+
+  .tmedia__docs a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s;
+  }
+
+  .tmedia__docs a:hover {
+    color: var(--terracotta);
+  }
+
+  .tmedia__docs img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 18%;
+    background: var(--sand);
+  }
+
+  .tmedia__card .btn {
+    justify-self: start;
+    margin-top: 6px;
+  }
+
+  /* fără imagine: fișa pe toată lățimea */
+  .tmedia--noimg .tmedia__card {
+    grid-column: 1 / -1;
+  }
+
+  .tmedia--noimg .tmedia__facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    column-gap: 32px;
+  }
+
+  @media (max-width: 960px) {
+    .tmedia__img,
+    .tmedia--tall .tmedia__img {
+      grid-column: 1 / -1;
+      aspect-ratio: 5 / 4;
+    }
+    .tmedia--tall .tmedia__img {
+      aspect-ratio: 4 / 5;
+      width: min(100%, 520px);
+    }
+    .tmedia__card,
+    .tmedia--tall .tmedia__card {
+      grid-column: 1 / -1;
+      max-width: 560px;
+      margin-top: 36px;
+    }
+    .tmedia--noimg .tmedia__card {
+      max-width: none;
+      margin-top: 0;
+    }
+  }
+</style>

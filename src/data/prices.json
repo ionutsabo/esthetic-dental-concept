@@ -1,0 +1,937 @@
+[
+ {
+  "cat": "Parodontologie",
+  "items": [
+   {
+    "t": "Consultație",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Igienizare profesională protocol GBT",
+    "d": "30 minute",
+    "p": "450 RON"
+   },
+   {
+    "t": "Airflow",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Periaj profesional",
+    "d": "30 minute",
+    "p": "150 RON"
+   },
+   {
+    "t": "Fluorizare topică/arcadă",
+    "d": "20 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Parodontometrie și indici parodontali",
+    "d": "30 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "DSR (Surfasaj radicular/dinte)",
+    "d": "45 minute",
+    "p": "150 RON"
+   },
+   {
+    "t": "Amputație radiculară",
+    "d": "60 minute",
+    "p": "350 RON"
+   },
+   {
+    "t": "Lambou asanare/alungire coronară/dinte",
+    "d": "60 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Gingivectomie",
+    "d": "30 minute",
+    "p": "350 RON"
+   },
+   {
+    "t": "Gingivo-osteoplastie",
+    "d": "30 minute",
+    "p": "600 RON"
+   },
+   {
+    "t": "Regenerare parodontală defecte intra-osoase",
+    "d": "90 minute",
+    "p": "500 EUR"
+   },
+   {
+    "t": "Grefă gingivală liberă per dinte/implant",
+    "d": "60 minute",
+    "p": "1500 RON"
+   },
+   {
+    "t": "Lambou deplasat coronar +/- grefă conjunctivă",
+    "d": "90 minute",
+    "p": "1700 RON"
+   },
+   {
+    "t": "Imobilizare fir metalic/dinte",
+    "d": "60 minute",
+    "p": "150 RON"
+   },
+   {
+    "t": "Aplicare Perisolv și acid hyaluronic/dinte",
+    "d": "15 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Aplicare sterifygel",
+    "d": "15 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Creare contact ovat/situs",
+    "d": "30 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Frenectomie",
+    "d": "30 minute",
+    "p": "500 RON"
+   }
+  ]
+ },
+ {
+  "cat": "Laser",
+  "items": [
+   {
+    "t": "Decontaminare laser",
+    "d": "30 minute",
+    "p": "400 RON"
+   },
+   {
+    "t": "Decontaminare laser parodontite/periimplantite/arcadă",
+    "d": "60 minute",
+    "p": "1000 RON"
+   },
+   {
+    "t": "Albire laser",
+    "d": "90 minute",
+    "p": "1700 RON"
+   },
+   {
+    "t": "Gingivectomie laser",
+    "d": "30 minute",
+    "p": "400 RON"
+   }
+  ]
+ },
+ {
+  "cat": "Stomatologie generală",
+  "items": [
+   {
+    "t": "Consultație",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Control",
+    "d": "30 minute",
+    "p": "100 RON"
+   },
+   {
+    "t": "Obturație",
+    "d": "60 minute",
+    "p": "300-500 RON"
+   },
+   {
+    "t": "Obturație glass-ionomer",
+    "d": "60 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Adiții compozit",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Injectări compozit/dinte",
+    "d": "60 minute",
+    "p": "600 RON"
+   },
+   {
+    "t": "Drenaj endodontic",
+    "d": "30 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Coafaj direct Biodentina/MTA",
+    "d": "30 minute",
+    "p": "400 RON"
+   },
+   {
+    "t": "Sigilare dinte permanent",
+    "d": "30 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Igienizare",
+    "d": "30 minute",
+    "p": "450 RON"
+   },
+   {
+    "t": "Airflow",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Periaj professional",
+    "d": "30 minute",
+    "p": "150 RON"
+   },
+   {
+    "t": "Fluorizare topică/arcadă",
+    "d": "20 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Gutieră contenție",
+    "d": "20 minute",
+    "p": "500 RON"
+   }
+  ]
+ },
+ {
+  "cat": "Edodonție la microscop",
+  "items": [
+   {
+    "t": "Consultație",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Tratament dinți frontali + obturație canal",
+    "d": "90 minute",
+    "p": "800 RON"
+   },
+   {
+    "t": "Tratament premolari + obturație canal",
+    "d": "120 minute",
+    "p": "900 RON"
+   },
+   {
+    "t": "Tratament molari + obturație canal",
+    "d": "120 minute",
+    "p": "1100 RON"
+   },
+   {
+    "t": "Retratament dinți frontali + obturație canal",
+    "d": "90 minute",
+    "p": "900 RON"
+   },
+   {
+    "t": "Retratament premolari + obtutație canal",
+    "d": "120 minute",
+    "p": "1000 RON"
+   },
+   {
+    "t": "Retratament molari + obturație canal",
+    "d": "120 minute",
+    "p": "1400 RON"
+   },
+   {
+    "t": "Aplicare MTA",
+    "d": "30 minute",
+    "p": "400 RON"
+   },
+   {
+    "t": "Aplicare pivot fibră de sticlă",
+    "d": "30 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Reconstrucția bontului protetic (RCR)",
+    "d": "45 minute",
+    "p": "500- 700 RON"
+   },
+   {
+    "t": "Îndepărtare corp străin",
+    "d": "30 minute",
+    "p": "400 RON"
+   },
+   {
+    "t": "Albire endodontică/dinte",
+    "d": "30 minute",
+    "p": "400 RON"
+   },
+   {
+    "t": "Îndepărtare pivot",
+    "d": "30 minute",
+    "p": "400- 600 RON"
+   },
+   {
+    "t": "Build-up (pre-endo)",
+    "d": "30 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Pulpectomie",
+    "d": "20 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Aplicare Biodentină",
+    "d": "30 minute",
+    "p": "500 RON"
+   }
+  ]
+ },
+ {
+  "cat": "Protetică estetică pe dinte",
+  "items": [
+   {
+    "t": "Consultație",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Modjaw – analiză funcțională",
+    "d": "60 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Fotografii + video",
+    "d": "30 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Scanare intraorală în scop diagnostic",
+    "d": "30 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Înregistrare arc facial și montare articulator",
+    "d": "60 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Mock-up motivațional/dinte",
+    "d": "30 minute",
+    "p": "150 RON"
+   },
+   {
+    "t": "Mock-up funcțional/arcadă",
+    "d": "60 minute",
+    "p": "1500 RON"
+   },
+   {
+    "t": "Albire dentară lampă în cabinet",
+    "d": "90 minute",
+    "p": "1700 RON"
+   },
+   {
+    "t": "Albire dentară gutiere",
+    "d": "30 minute",
+    "p": "1000 RON"
+   },
+   {
+    "t": "Șlefuiri selective/ședință",
+    "d": "60 minute",
+    "p": "400 RON"
+   },
+   {
+    "t": "Ablație (îndepărtare coroană veche)",
+    "d": "30 minute",
+    "p": "100 RON"
+   },
+   {
+    "t": "Scutan (coroană provizorie direct)",
+    "d": "30 minute",
+    "p": "150 RON"
+   },
+   {
+    "t": "Coroană provizorie indirectă",
+    "d": "30 minute",
+    "p": "400 RON"
+   },
+   {
+    "t": "Coroană provizorie metalo-ceramică",
+    "d": "30 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Fațetă dentară ceramică presată/disilicat de litiu",
+    "d": "90 minute",
+    "p": "2200 RON"
+   },
+   {
+    "t": "Fațetă dentară ceramică feldspatică",
+    "d": "90 minute",
+    "p": "2500 RON"
+   },
+   {
+    "t": "Inlay/Onlay CEREC ceramic – aceeași zi",
+    "d": "60 minute",
+    "p": "1200 RON"
+   },
+   {
+    "t": "Inlay/Onlay CEREC compozit – aceeași zi",
+    "d": "60 minute",
+    "p": "1000 RON"
+   },
+   {
+    "t": "Incisiv central protocol E-Lab",
+    "d": "120 minute",
+    "p": "500 EUR"
+   },
+   {
+    "t": "Coroană metalo-ceramică pe dinte",
+    "d": "60 minute",
+    "p": "1400 RON"
+   },
+   {
+    "t": "Coroană zirconiu pe dinte",
+    "d": "60 minute",
+    "p": "1800 RON"
+   },
+   {
+    "t": "Coroană integral ceramică pe dinte",
+    "d": "60 minute",
+    "p": "1800 RON"
+   },
+   {
+    "t": "Proteză totală/parțială/arcadă",
+    "d": "30 minute",
+    "p": "2000 RON"
+   },
+   {
+    "t": "Rebazare proteză",
+    "d": "30 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Reparație coroană",
+    "d": "30 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Proteză telescopată/dinți- fără componenta fixă",
+    "d": "90 minute",
+    "p": "8000 RON"
+   }
+  ]
+ },
+ {
+  "cat": "Protetică estetică pe implant",
+  "items": [
+   {
+    "t": "Coroană provizorie pe implant",
+    "d": null,
+    "p": "1000 RON"
+   },
+   {
+    "t": "Coroană metalo-ceramică înșurubată pe implant",
+    "d": null,
+    "p": "500 EUR"
+   },
+   {
+    "t": "Coroană zirconiu înșurubată pe implant",
+    "d": null,
+    "p": "650 EUR"
+   },
+   {
+    "t": "Bont hibrid zirconiu",
+    "d": null,
+    "p": "300 EUR"
+   },
+   {
+    "t": "Bont customizat Titan",
+    "d": null,
+    "p": "250 EUR"
+   },
+   {
+    "t": "Bont intermediar (OCTA/Multi unit)",
+    "d": null,
+    "p": "150 EUR"
+   },
+   {
+    "t": "Proteză scheletată (nu include componenta fixă)",
+    "d": null,
+    "p": "9000 RON"
+   },
+   {
+    "t": "Proteză pe bară frezată/implanturi (4 implanturi)",
+    "d": null,
+    "p": "18000 RON"
+   },
+   {
+    "t": "Proteză telescopată pe implanturi",
+    "d": null,
+    "p": "25000 RON"
+   },
+   {
+    "t": "Proteză pe keratori",
+    "d": null,
+    "p": "6000 RON"
+   }
+  ]
+ },
+ {
+  "cat": "Chirurgie",
+  "items": [
+   {
+    "t": "Control",
+    "d": "30 minute",
+    "p": "100 RON"
+   },
+   {
+    "t": "Consultație primară",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Extracție dinte monoradicular",
+    "d": "30 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Extracție dinte pluriradicular",
+    "d": "30 minute",
+    "p": "400 RON"
+   },
+   {
+    "t": "Extracție rest radicular",
+    "d": "30 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Extracție molar de minte",
+    "d": "60 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Odontectomie",
+    "d": "60 minute",
+    "p": "600-900 RON"
+   },
+   {
+    "t": "Incizie abces",
+    "d": "30 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Chistectomie",
+    "d": "60 minute",
+    "p": "400 RON"
+   },
+   {
+    "t": "Plastia comunicării oro-sinusale",
+    "d": "30 minute",
+    "p": "800 RON"
+   },
+   {
+    "t": "Regularizarea crestei alveolare/situs",
+    "d": "45 minute",
+    "p": "800 RON"
+   },
+   {
+    "t": "Rezecție apicală",
+    "d": "60 minute",
+    "p": "1000 RON"
+   },
+   {
+    "t": "Reconstrucție defect osos post chistectomii",
+    "d": "60 minute",
+    "p": "350 EUR"
+   }
+  ]
+ },
+ {
+  "cat": "Implantologie",
+  "items": [
+   {
+    "t": "Consultație",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Explantare",
+    "d": "45 minute",
+    "p": "700 RON"
+   },
+   {
+    "t": "Descoperire chirurgicală implant",
+    "d": "30 minute",
+    "p": "350 RON"
+   },
+   {
+    "t": "Implant dentar MegaGen AnyRidge/Blue Diamond",
+    "d": "60 minute",
+    "p": "650 EUR"
+   },
+   {
+    "t": "Implant dentar Pure zirconiu",
+    "d": "60 minute",
+    "p": "1100 EUR"
+   },
+   {
+    "t": "Prezervare alveolară post extracțională",
+    "d": "45 minute",
+    "p": "400 EUR"
+   },
+   {
+    "t": "Reconstrucție osoasă orizontală/zonă implantară",
+    "d": "60 minute",
+    "p": "650 EUR"
+   },
+   {
+    "t": "Elevare sinusală/zonă implantară",
+    "d": "90 minute",
+    "p": "650 EUR"
+   },
+   {
+    "t": "Reconstrucție osoasă cu bloc autolog/situs",
+    "d": "90 minute",
+    "p": "800 EUR"
+   },
+   {
+    "t": "Reconstrucție osoasă cu bloc autolog/2 situsuri",
+    "d": "90 minute",
+    "p": "1000 EUR"
+   },
+   {
+    "t": "Reconstrucție osoasă cu bloc autolog/3 situsuri",
+    "d": "90 minute",
+    "p": "1200 EUR"
+   },
+   {
+    "t": "Ghid chirurgical/implant",
+    "d": "30 minute",
+    "p": "600 RON"
+   }
+  ]
+ },
+ {
+  "cat": "Ortodonție",
+  "items": [
+   {
+    "t": "Consultație inițială",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Consultație secundară",
+    "d": "30 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Control contenție",
+    "d": "15 minute",
+    "p": "150 RON"
+   },
+   {
+    "t": "Fotografii/TELE/scanare intraorală",
+    "d": "30 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Elaborare plan tratament",
+    "d": "30 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Adaptare gutieră funcțională/șină de relaxare",
+    "d": "30 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Aplicare Aparat fix segmentar cu/fără ancoraj scheletic",
+    "d": "60 minute",
+    "p": "2500 RON"
+   },
+   {
+    "t": "Aplicare Plăcută cu ancoraj + șuruburi",
+    "d": "60 minute",
+    "p": "1200 RON"
+   },
+   {
+    "t": "Aplicare Aparat mobilizabil",
+    "d": "30 minute",
+    "p": "2000 RON"
+   },
+   {
+    "t": "Aplicare Aparat miofuncțional",
+    "d": "60 minute",
+    "p": "1800 RON"
+   },
+   {
+    "t": "Aplicare Aparat ortodontic fix fizionomic/arcadă",
+    "d": "60 minute",
+    "p": "8000 RON"
+   },
+   {
+    "t": "Aplicare Aparat ortodontic fix metalic/arcadă",
+    "d": "60 minute",
+    "p": "6000 RON"
+   },
+   {
+    "t": "Aplicare Aparat ortodontic lingual bimaxilar",
+    "d": "120 minute",
+    "p": "6000 EUR"
+   },
+   {
+    "t": "Aplicare contenție fixă preprotetică",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Aplicare contenție mobilizabilă",
+    "d": "30 minute",
+    "p": "1200 RON"
+   },
+   {
+    "t": "Aplicare gutieră contenție",
+    "d": "30 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Aplicare contenție fixă/arcadă",
+    "d": "30 minute",
+    "p": "800 RON"
+   },
+   {
+    "t": "Aplicare Disjunctor ancorat dentar",
+    "d": null,
+    "p": "2500 RON"
+   },
+   {
+    "t": "Aplicare Disjunctor cu ancoraj scheletic tip MSE",
+    "d": null,
+    "p": "3900 RON"
+   },
+   {
+    "t": "Aplicare gutieră burx-checker",
+    "d": "30 minute",
+    "p": "600 RON"
+   },
+   {
+    "t": "Aplicare gutieră funcțională/șină de relaxare",
+    "d": null,
+    "p": "2000 RON"
+   },
+   {
+    "t": "Aplicare gutiere ANGEL ALIGNEE",
+    "d": "60 minute",
+    "p": "25000 RON"
+   },
+   {
+    "t": "Aplicare Lip bumper",
+    "d": null,
+    "p": "1000 RON"
+   },
+   {
+    "t": "Aplicare Mască Delaire",
+    "d": null,
+    "p": "1500 RON"
+   },
+   {
+    "t": "Aplicare menținător de spațiu (bară palatinală/arc lingual)",
+    "d": null,
+    "p": "1500 RON"
+   },
+   {
+    "t": "Aplicare Mini-implant ortodontic",
+    "d": null,
+    "p": "500 RON"
+   },
+   {
+    "t": "Activare aparat/arcadă/ședință",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Activare aparat bimaxilar/ședință",
+    "d": "30 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Activare/control aparat mobilizabil/miofuncțional",
+    "d": "30 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Îndepărtare aparat fix/arcadă",
+    "d": "60 minute",
+    "p": "350 RON"
+   },
+   {
+    "t": "Îndepărtare aparat segmentar",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Recolare/înlocuire bracket/spurs",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Re-evaluare/Rediscuție plan de tratament",
+    "d": "30 minute",
+    "p": "500 RON"
+   },
+   {
+    "t": "Aplicare Disjunctor cu ancoraj hibrid",
+    "d": null,
+    "p": "3000 RON"
+   },
+   {
+    "t": "Aplicare Disjunctor cu ancoraj scheletic și ghid chirurgical",
+    "d": null,
+    "p": "5000 RON"
+   }
+  ]
+ },
+ {
+  "cat": "Pedodonție",
+  "items": [
+   {
+    "t": "Consultație",
+    "d": "30 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Consultație (pacient necooperant)",
+    "d": "60 minute",
+    "p": "350 RON"
+   },
+   {
+    "t": "Profilaxia cariei dentare GBT + indici + instructaj periaj",
+    "d": "30 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Air flow + periaj",
+    "d": "30 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Fluorizare/arcadă",
+    "d": "30 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Obturație dinte temporar",
+    "d": "60 minute",
+    "p": "250 RON"
+   },
+   {
+    "t": "Obturație cu capă de celuloid",
+    "d": "60 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Coroană pedodontică performată metal",
+    "d": "60 minute",
+    "p": "400 RON"
+   },
+   {
+    "t": "Coafaj direct/indirect",
+    "d": "30 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Obturație provizorie",
+    "d": "30 minute",
+    "p": "150 RON"
+   },
+   {
+    "t": "Menținător de spațiu",
+    "d": "30 minute",
+    "p": "650 RON"
+   },
+   {
+    "t": "Extracție dinte temporar",
+    "d": "30 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Tratament endodontic dinte temporar",
+    "d": "60 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Tratament ICON 1-2 dinți",
+    "d": "60 minute",
+    "p": "300 RON"
+   },
+   {
+    "t": "Drenaj endodontic dinte temporar",
+    "d": "30 minute",
+    "p": "150 RON"
+   },
+   {
+    "t": "Tratament gangrenă + obturație canal",
+    "d": "90 minute",
+    "p": "350 RON"
+   },
+   {
+    "t": "Sigilare dinte temporar",
+    "d": "30 minute",
+    "p": "200 RON"
+   },
+   {
+    "t": "Pulpotomie",
+    "d": "30 minute",
+    "p": "300 RON"
+   }
+  ]
+ },
+ {
+  "cat": "Radiologie",
+  "items": [
+   {
+    "t": "Ortopantomografie (OPT)",
+    "d": null,
+    "p": "200 RON"
+   },
+   {
+    "t": "TELE profil",
+    "d": null,
+    "p": "100 RON"
+   },
+   {
+    "t": "Retroalveolar",
+    "d": null,
+    "p": "50 RON"
+   },
+   {
+    "t": "CBCT segmentar",
+    "d": null,
+    "p": "200 RON"
+   },
+   {
+    "t": "CBCT hemiarcada",
+    "d": null,
+    "p": "250 RON"
+   },
+   {
+    "t": "CBCT monomaxilar",
+    "d": null,
+    "p": "300 RON"
+   },
+   {
+    "t": "CBCT bimaxilar",
+    "d": null,
+    "p": "400 RON"
+   },
+   {
+    "t": "CBCT ATM",
+    "d": null,
+    "p": "350 RON"
+   },
+   {
+    "t": "CBCT ATM + interpretare",
+    "d": null,
+    "p": "500 RON"
+   }
+  ]
+ }
+]

@@ -1,0 +1,17 @@
+---
+import Legal from "@/components/site/Legal.astro";
+const sections: [string, string][] = [
+  ["Cine este operatorul datelor", "Datele de identificare ale clinicii și ale persoanei responsabile cu protecția datelor, dacă există."],
+  ["Ce date colectăm", "Prin formular: nume, telefon, email, mesaj. Prin telefon și WhatsApp: datele pe care ni le transmiți. În clinică: datele medicale din fișa pacientului, care sunt date de categorie specială."],
+  ["De ce și pe ce temei", "Pentru programare și răspuns la solicitări (consimțământ și demersuri precontractuale), pentru tratament (obligații legale medicale), pentru comunicări de marketing (doar cu acord separat)."],
+  ["Cât timp păstrăm datele", "Perioadele de păstrare pentru solicitări, fișa medicală (conform legislației medicale) și comunicări."],
+  ["Cui transmitem datele", "Furnizori care ne ajută să funcționăm: găzduirea site-ului, laboratorul de tehnică dentară, partenerii pentru plata în rate (Star BT, TBI Bank), doar când e cazul și doar cât e necesar."],
+  ["Fotografii, videouri și cazuri clinice", "Imaginile cu pacienți și cazurile clinice apar pe site sau pe rețelele sociale doar cu acordul scris al pacientului, explicit pentru acest scop. Acordul se poate retrage oricând."],
+  ["Recenzii", "Cum afișăm recenziile, cu sau fără nume și fotografie, și cum poți cere retragerea lor."],
+  ["Drepturile tale", "Acces, rectificare, ștergere, restricționare, portabilitate, opoziție, retragerea consimțământului și cum le exerciți."],
+  ["Plângeri", "Dreptul de a depune o plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (ANSPDCP)."],
+  ["Securitatea datelor", "Măsurile tehnice și organizatorice prin care protejăm datele."],
+];
+---
+
+<Legal title="Politica de confidențialitate" titleA="Politica de" titleB="confidențialitate" intro="Ce date colectăm, de ce, cât timp le păstrăm și ce drepturi ai. Politica trebuie să spună același lucru ca documentele pe care pacienții le semnează în clinică." sections={sections} />

@@ -1,0 +1,76 @@
+---
+/** Structura unei pagini legale. Textul final îl redactează avocatul (vezi brief). */
+import Layout from "@/layouts/Clinic.astro";
+type Props = { title: string; titleA: string; titleB: string; intro: string; sections: [string, string][] };
+const { title, titleA, titleB, intro, sections } = Astro.props;
+---
+
+<Layout title={title} navInk>
+  <section class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb" data-fade><a href="/">Acasă</a><span>/</span><span aria-current="page">{title}</span></nav>
+      <h1 class="phead__title phead__title--md" data-split>{titleA} <em>{titleB}</em></h1>
+      <div class="phead__row">
+        <p class="lead" data-fade>{intro}</p>
+        <span class="tag" data-fade>Ultima actualizare: de completat</span>
+      </div>
+    </div>
+  </section>
+  <section class="wrap legal">
+    <nav class="legal__toc" aria-label="Cuprins">
+      <p class="small">Cuprins</p>
+      {sections.map(([h], i) => <a href={`#s${i + 1}`}>{i + 1}. {h}</a>)}
+    </nav>
+    <div class="prose">
+      <p class="note"><strong>Structură propusă.</strong> Textul final îl redactează avocatul specializat în protecția datelor, pe baza inventarului tehnic pregătit de noi. Aici sunt secțiunile pe care pagina trebuie să le acopere.</p>
+      {
+        sections.map(([h, d], i) => (
+          <>
+            <h2 id={`s${i + 1}`}>{i + 1}. {h}</h2>
+            <p>{d}</p>
+          </>
+        ))
+      }
+      <slot />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: clamp(32px, 6vw, 110px);
+    align-items: start;
+    padding-bottom: clamp(100px, 12vw, 180px);
+  }
+
+  .legal__toc {
+    position: sticky;
+    top: 110px;
+    display: grid;
+    gap: 8px;
+    font-size: 0.92rem;
+  }
+
+  .legal__toc a {
+    color: var(--muted);
+  }
+
+  .legal__toc a:hover {
+    color: var(--ink);
+  }
+
+  .legal :global(.prose h2) {
+    scroll-margin-top: 110px;
+  }
+
+  @media (max-width: 860px) {
+    .legal {
+      grid-template-columns: 1fr;
+    }
+    .legal__toc {
+      position: static;
+    }
+  }
+</style>

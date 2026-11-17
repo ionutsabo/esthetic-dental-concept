@@ -1,0 +1,231 @@
+---
+import "@/styles/clinic.css";
+import "@/styles/arcada.css";
+import { SITE_NAME, SITE_DESCRIPTION, CLINIC } from "@/consts.ts";
+import { PRIORITY, COMPLETE } from "@/data/treatments.ts";
+import Mark from "@/components/brand/Mark.astro";
+import { isArc, localPath } from "@/utils/path.ts";
+
+type Props = {
+  title?: string;
+  description?: string;
+  /** Nav pornește închis la culoare (pentru pagini fără hero foto). */
+  navInk?: boolean;
+  bodyClass?: string;
+};
+
+const { title, description = SITE_DESCRIPTION, navInk = false, bodyClass } = Astro.props;
+/** Versiunea „Arcada” (stilul variantei 3, deschis): aceleași pagini, sub /arcada. Linkurile primesc prefixul în middleware. */
+const arc = isArc(Astro.url);
+const pageTitle = title ? `${title} · ${SITE_NAME}` : SITE_NAME;
+const path = localPath(Astro.url.pathname).replace(/^\/arcada/, "").replace(/\/$/, "") || "/";
+const on = (p: string) => (path === p || path.startsWith(p + "/") ? "page" : undefined);
+
+const links = [
+  ["/povestea-clinicii", "Despre noi"],
+  ["/echipa-medicala", "Echipa"],
+  ["/preturi", "Prețuri"],
+  ["/blog", "Blog"],
+  ["/contact", "Contact"],
+];
+---
+
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/img/brand/simbol.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {
+      arc ? (
+        <link
+          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500&display=swap"
+          rel="stylesheet"
+        />
+      ) : (
+        <link
+          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500&display=swap"
+          rel="stylesheet"
+        />
+      )
+    }
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body class:list={[arc && "arc", bodyClass]}>
+    <a class="skip" href="#main">Sari la conținut</a>
+    <header class:list={["nav", navInk && "nav--ink"]} data-nav>
+      <a href="/" class="logo" aria-label="Esthetic Dental Center, acasă">
+        <Mark class="logo__mark" />
+        <span>Esthetic</span><em>Dental</em><span>Center</span>
+      </a>
+      <nav class="nav__links" aria-label="Principal">
+        <a href={links[0][0]} aria-current={on(links[0][0])}>{links[0][1]}</a>
+        <div class="nav__dd">
+          <a href="/tratamente" aria-current={on("/tratamente")} aria-haspopup="true">Tratamente</a>
+          <div class="mega" role="menu">
+            <div class="mega__col">
+              <p class="mega__k">Direcțiile noastre</p>
+              {
+                PRIORITY.map((t) => (
+                  <a class="mega__big" href={`/tratamente/${t.slug}`} role="menuitem">
+                    {t.name}
+                    <span>{t.badge}</span>
+                  </a>
+                ))
+              }
+            </div>
+            <div class="mega__col">
+              <p class="mega__k">Toate specializările</p>
+              {
+                COMPLETE.map((t) => (
+                  <a class="mega__small" href={`/tratamente/${t.slug}`} role="menuitem">
+                    {t.name}
+                  </a>
+                ))
+              }
+              <a class="mega__all link" href="/tratamente">Vezi toate tratamentele →</a>
+            </div>
+          </div>
+        </div>
+        {links.slice(1).map(([href, label]) => <a href={href} aria-current={on(href)}>{label}</a>)}
+      </nav>
+      <div class="nav__right">
+        <a class="nav__phone" href={CLINIC.phoneHref}>{CLINIC.phone}</a>
+        <a class="btn" href="/contact#programare">
+          <span class="label">Programează-te</span>
+          <span class="dot" aria-hidden="true">↗</span>
+        </a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mmenu" data-menu-open>
+          <span class="menu-btn__l">Meniu</span>
+          <span class="menu-btn__i" aria-hidden="true"><i></i><i></i></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- meniu mobil -->
+    <div class="mmenu" id="mmenu" hidden data-menu>
+      <div class="mmenu__top">
+        <a href="/" class="logo"><Mark class="logo__mark" /><span>Esthetic</span><em>Dental</em><span>Center</span></a>
+        <button class="mmenu__close" type="button" data-menu-close aria-label="Închide meniul">Închide ✕</button>
+      </div>
+      <nav class="mmenu__main" aria-label="Meniu mobil">
+        <a href="/">Acasă</a>
+        <a href="/povestea-clinicii">Despre noi</a>
+        <a href="/tratamente">Tratamente</a>
+        <a href="/echipa-medicala">Echipa medicală</a>
+        <a href="/preturi">Prețuri</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div class="mmenu__treat">
+        <p class="eyebrow">Tratamente</p>
+        <ul>{[...PRIORITY, ...COMPLETE].map((t) => <li><a href={`/tratamente/${t.slug}`}>{t.name}</a></li>)}</ul>
+      </div>
+      <div class="mmenu__contact">
+        <a class="btn" href="/contact#programare">Programează-te <span class="dot" aria-hidden="true">↗</span></a>
+        <a class="link" href={CLINIC.phoneHref}>{CLINIC.phone}</a>
+        <a class="link" href={CLINIC.whatsapp}>WhatsApp</a>
+      </div>
+    </div>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="footer dark frame" id="footer">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <p class="h3" style="max-width: 18ch">
+            Un singur loc pentru tot<br />ce ține de <em class="nw">zâmbetul tău.</em>
+          </p>
+          <p class="small" style="margin-top: 18px">{CLINIC.address}<br />{CLINIC.addressShort}</p>
+          <a class="btn btn--light" href="/contact#programare" style="margin-top: 24px">
+            Programează-te <span class="dot" aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <div>
+          <h4>Clinica</h4>
+          <ul>
+            <li><a class="link" href="/povestea-clinicii">Despre noi</a></li>
+            <li><a class="link" href="/echipa-medicala">Echipa medicală</a></li>
+            <li><a class="link" href="/cazuri-clinice">Cazuri clinice</a></li>
+            <li><a class="link" href="/blog">Blog</a></li>
+            <li><a class="link" href="/preturi">Prețuri și plata în rate</a></li>
+            <li><a class="link" href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Tratamente</h4>
+          <ul>{[...PRIORITY, ...COMPLETE].map((t) => <li><a class="link" href={`/tratamente/${t.slug}`}>{t.name}</a></li>)}</ul>
+        </div>
+        <div>
+          <h4>Program</h4>
+          <ul>
+            {
+              CLINIC.hours.map(([d, h]) => (
+                <li>
+                  {d}
+                  <br />
+                  <span class="small">{h}</span>
+                </li>
+              ))
+            }
+          </ul>
+          <h4 style="margin-top: 28px">Contact</h4>
+          <ul>
+            <li><a class="link" href={CLINIC.phoneHref}>{CLINIC.phone}</a></li>
+            <li><a class="link" href={CLINIC.whatsapp}>WhatsApp</a></li>
+            <li><a class="link" href={`mailto:${CLINIC.email}`}>{CLINIC.email}</a></li>
+          </ul>
+          <h4 style="margin-top: 28px">Social</h4>
+          <ul class="footer__social">
+            <li><a class="link" href={CLINIC.social.instagram}>Instagram</a></li>
+            <li><a class="link" href={CLINIC.social.facebook}>Facebook</a></li>
+            <li><a class="link" href={CLINIC.social.tiktok}>TikTok</a></li>
+            <li><a class="link" href={CLINIC.social.youtube}>YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer__big" aria-hidden="true"><Mark class="footer__mark" />Esthetic <em>Dental</em></p>
+      <div class="footer__legal">
+        <span>© 2026 Esthetic Dental Center · Concept de design{arc && ", versiunea Arcada"}</span>
+        <span class="footer__legal-links">
+          <a href="/termeni-si-conditii">Termeni și condiții</a>
+          <a href="/politica-de-confidentialitate">Confidențialitate</a>
+          <a href="/politica-cookie">Cookie-uri</a>
+          <button type="button" data-cookie-open>Setări cookie</button>
+          <a href="/harta-site">Harta site-ului</a>
+        </span>
+      </div>
+    </footer>
+
+    <div class="mobilebar">
+      <a href={CLINIC.phoneHref}>Sună</a>
+      <a class="primary" href="/contact#programare">Programează-te</a>
+    </div>
+
+    <!-- consimțământ cookie -->
+    <div class="cookie" hidden data-cookie role="dialog" aria-live="polite" aria-label="Cookie-uri">
+      <p>
+        Folosim cookie-uri necesare ca site-ul să funcționeze. Cu acordul tău, folosim și cookie-uri de analiză și pentru
+        hărți și videouri. <a class="link" href="/politica-cookie">Detalii</a>
+      </p>
+      <div class="cookie__actions">
+        <button type="button" class="btn btn--ghost" data-consent="necesare">Doar necesare</button>
+        <button type="button" class="btn" data-consent="toate">Accept toate</button>
+      </div>
+    </div>
+
+    <script>
+      import "@/scripts/motion.ts";
+      import "@/scripts/site.ts";
+    </script>
+  </body>
+</html>

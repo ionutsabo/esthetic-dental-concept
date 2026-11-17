@@ -1,0 +1,10 @@
+---
+import Page from "../../tratamente/[slug].astro";
+import { TREATMENTS } from "@/data/treatments.ts";
+
+export function getStaticPaths() {
+  return TREATMENTS.filter((t) => !t.bespoke).map((t) => ({ params: { slug: t.slug }, props: { t } }));
+}
+---
+
+<Page {...Astro.props} />

@@ -1,0 +1,487 @@
+/* =================================================================
+   Versiunea „Arcada” (stilul variantei 3, pe deschis)
+   Aceleași pagini ca site-ul Manifest, sub /arcada. Totul e sub .arc,
+   așa că nu atinge versiunea Manifest.
+   Semnături: Fraunces italic, nav-pastilă cu contur auriu, linia aurie
+   din etichete, imagini în formă de arcadă și de dinte, benzi pline (fără ramă).
+   ================================================================= */
+
+.arc {
+  /* paleta arcadă */
+  --a-bg: #f4efe7;
+  --a-bg2: #ebe3d6;
+  --a-ink: #1b1815;
+  --a-gold: #a88a52;
+  --a-gold-l: #c9b27c;
+  --a-sand: #8a6a3e;
+  --a-dark: #1b1815;
+  --a-gold-line: rgba(168, 138, 82, 0.32);
+
+  /* tokenurile din clinic.css */
+  --paper: var(--a-bg);
+  --bone: var(--a-bg2);
+  --sand: #e4d9c8;
+  --clay: var(--a-gold-l);
+  --cacao: var(--a-dark);
+  --cacao-2: #2a2622;
+  --ink: var(--a-ink);
+  --muted: #776a5e;
+  --line: rgba(27, 24, 21, 0.13);
+  --terracotta: var(--a-sand);
+  --serif: "Fraunces", "Times New Roman", serif;
+  --radius: 28px;
+
+  /* tokenurile variantei 3 (arcada de tratamente) */
+  --bg: var(--a-bg);
+  --bg2: var(--a-bg2);
+  --fg: var(--a-ink);
+  --tooth: #fbf8f3;
+  --gold: var(--a-gold);
+  --amber: var(--a-gold);
+  --espresso: #161412;
+  --cream: #f3eee6;
+
+  background: var(--a-bg);
+}
+
+/* ---------- tipografie ---------- */
+.arc em,
+.arc .serif {
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  font-variation-settings: "SOFT" 30, "WONK" 0;
+}
+
+.arc .display em,
+.arc .h1 em,
+.arc .h2 em,
+.arc .h3 em {
+  color: var(--a-sand);
+}
+
+.arc .dark em,
+.arc .dark .display em,
+.arc .dark .h1 em,
+.arc .dark .h2 em {
+  color: var(--a-gold-l);
+}
+
+.arc .eyebrow {
+  gap: 10px;
+  font-size: 0.76rem;
+  letter-spacing: 0.2em;
+}
+
+.arc .eyebrow::before {
+  width: 18px;
+  height: 1px;
+  border-radius: 0;
+  background: var(--a-gold);
+}
+
+.arc .dark .eyebrow::before {
+  background: var(--a-gold-l);
+}
+
+/* ---------- benzi pline, fără ramă ---------- */
+.arc .frame {
+  margin: 0;
+  border-radius: 0;
+}
+
+.arc .dark {
+  background: var(--a-dark);
+  color: var(--cream);
+}
+
+.arc .bone {
+  background: var(--a-bg2);
+}
+
+.arc .tag {
+  border-color: var(--a-gold-line);
+}
+
+.arc .dark .tag {
+  border-color: rgba(201, 178, 124, 0.3);
+}
+
+/* ---------- butoane: pastilă simplă, auriu pe închis ---------- */
+.arc .btn {
+  gap: 12px;
+  min-height: 54px;
+  padding: 0 26px;
+}
+
+.arc .btn .dot {
+  width: auto;
+  height: auto;
+  background: none;
+  color: inherit;
+}
+
+.arc .btn:hover .dot {
+  transform: translate(2px, -2px);
+}
+
+.arc .btn--light {
+  --bg: var(--a-gold);
+  --fg: var(--espresso);
+}
+
+.arc .btn--light:hover {
+  --bg: #b99c64;
+}
+
+.arc .btn--ghost {
+  padding: 0 24px;
+  border-color: var(--a-gold-line);
+}
+
+.arc .dark .btn--ghost {
+  border-color: rgba(201, 178, 124, 0.4);
+}
+
+/* ---------- nav: pastilă centrată, cu contur auriu ---------- */
+.arc .nav,
+.arc .nav.nav--ink,
+.arc .nav.is-solid {
+  top: 14px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: min(1240px, calc(100% - 24px));
+  padding: 8px 8px 8px 22px;
+  background: color-mix(in srgb, var(--a-bg) 95%, transparent);
+  border: 1px solid var(--a-gold-line);
+  color: var(--a-ink);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.arc .nav.is-hidden {
+  transform: translate(-50%, -150%);
+}
+
+.arc .logo__mark,
+.arc .nav--ink .logo__mark,
+.arc .nav.is-solid .logo__mark {
+  filter: none;
+}
+
+.arc .logo em {
+  color: var(--a-gold);
+}
+
+.arc .nav__links a {
+  opacity: 0.78;
+}
+
+.arc .nav .btn,
+.arc .nav:not(.is-solid):not(.nav--ink) .btn {
+  --bg: var(--a-ink);
+  --fg: var(--a-bg);
+  min-height: 46px;
+  padding: 0 20px;
+}
+
+.arc .menu-btn {
+  border-color: var(--a-gold-line);
+}
+
+.arc .mega {
+  box-shadow:
+    0 0 0 1px var(--a-gold-line),
+    0 30px 70px -36px rgba(27, 24, 21, 0.35);
+}
+
+@media (max-width: 560px) {
+  .arc .nav {
+    padding: 6px 6px 6px 16px;
+  }
+}
+
+/* ---------- antet de pagină ---------- */
+.arc .phead {
+  padding-top: clamp(118px, 16vh, 170px);
+}
+
+/* Parodontologie are antet propriu */
+.arc .phero {
+  padding-top: clamp(118px, 16vh, 170px);
+}
+
+.arc .phero__title em {
+  color: var(--a-sand);
+}
+
+.arc .crumbs {
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  letter-spacing: 0.02em;
+}
+
+.arc .crumbs::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  margin-right: 4px;
+  background: var(--a-gold);
+}
+
+.arc .crumbs [aria-current] {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--a-sand);
+}
+
+.arc .phead__title {
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+}
+
+.arc .phead__title em {
+  color: var(--a-sand);
+  letter-spacing: -0.03em;
+  font-size: 1.04em;
+}
+
+/* imaginea mare de sub titlu: boltă de arcadă, cu contur auriu decalat */
+.arc .pimg,
+.arc .phero__img {
+  width: calc(100% - 2 * var(--gutter));
+  max-width: calc(1400px - 2 * var(--gutter));
+  margin: 0 auto clamp(24px, 3vw, 40px);
+  border-radius: 50% 50% 28px 28px / clamp(120px, 22vw, 340px) clamp(120px, 22vw, 340px) 28px 28px;
+  box-shadow:
+    14px 14px 0 -1px var(--a-bg),
+    14px 14px 0 0 var(--a-gold);
+}
+
+@media (max-width: 760px) {
+  .arc .pimg,
+  .arc .phero__img {
+    box-shadow:
+      8px 8px 0 -1px var(--a-bg),
+      8px 8px 0 0 var(--a-gold);
+  }
+}
+
+/* ---------- liste, pași, cifre ---------- */
+.arc .numlist .small {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--a-gold);
+}
+
+.arc .steps4::before {
+  background: var(--a-gold-line);
+}
+
+.arc .steps4 li::before {
+  background: var(--a-bg);
+  border-color: var(--a-gold);
+}
+
+.arc .steps4 li:first-child::before {
+  background: var(--a-gold);
+}
+
+.arc .dark .steps4 li::before {
+  background: var(--a-dark);
+}
+
+/* ---------- medici: fotografie în formă de dinte ---------- */
+.arc .dcard__photo {
+  border-radius: 46% 46% 26% 26% / 30% 30% 14% 14%;
+}
+
+/* ---------- articole, formulare ---------- */
+.arc .post__meta .k {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.arc .field input,
+.arc .field textarea,
+.arc .field select {
+  background: #fbf8f3;
+  border-color: rgba(27, 24, 21, 0.12);
+}
+
+.arc .field input:focus,
+.arc .field textarea:focus,
+.arc .field select:focus {
+  border-color: var(--a-gold);
+}
+
+.arc .prose li::marker {
+  color: var(--a-gold);
+}
+
+.arc .prose blockquote {
+  border-left-color: var(--a-gold);
+}
+
+/* ---------- CTA de final: lumină, centrat, ca pe homepage ---------- */
+.arc section.frame.dark:has(> .endcta) {
+  background: var(--a-bg2);
+  color: var(--a-ink);
+}
+
+.arc .endcta {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
+  padding-block: clamp(90px, 11vw, 170px);
+}
+
+.arc .endcta > div:first-child {
+  display: grid;
+  justify-items: center;
+}
+
+.arc .endcta .display {
+  font-size: clamp(3rem, 8vw, 8.4rem);
+  letter-spacing: -0.055em;
+}
+
+.arc .endcta .display em {
+  color: var(--a-sand);
+}
+
+.arc .endcta .lead,
+.arc .endcta .eyebrow {
+  color: var(--muted);
+}
+
+.arc .endcta .lead {
+  max-width: 44ch;
+}
+
+.arc .endcta .eyebrow::before {
+  background: var(--a-gold);
+}
+
+.arc .endcta__actions {
+  justify-content: center;
+}
+
+.arc .endcta .btn--ghost {
+  border-color: rgba(27, 24, 21, 0.25);
+}
+
+/* ---------- arcada de tratamente pe pagina Tratamente ---------- */
+.arc .arcmap-sec {
+  padding-block: clamp(32px, 4vw, 64px) clamp(64px, 8vw, 120px);
+  background: var(--a-bg2);
+}
+
+/* ---------- footer deschis, cu numele mare centrat ---------- */
+.arc .footer {
+  background: var(--a-bg2);
+  color: var(--a-ink);
+  border-top: 1px solid var(--a-gold-line);
+}
+
+.arc .footer h4,
+.arc .footer .small {
+  color: var(--muted);
+}
+
+.arc .footer .h3 em {
+  color: var(--a-sand);
+}
+
+.arc .footer .btn--light {
+  --bg: var(--a-ink);
+  --fg: var(--a-bg);
+}
+
+.arc .footer__big {
+  text-align: center;
+  font-size: clamp(3.4rem, 14.6vw, 16.5rem);
+  letter-spacing: -0.065em;
+  color: var(--a-ink);
+}
+
+.arc .footer__big em {
+  color: var(--a-sand);
+}
+
+.arc .footer__legal {
+  border-top-color: var(--line);
+  color: var(--muted);
+}
+
+.arc .footer__legal-links a:hover,
+.arc .footer__legal-links button:hover {
+  color: var(--a-ink);
+}
+
+/* ---------- bara de jos pe mobil, cookie ---------- */
+.arc .mobilebar {
+  background: var(--a-ink);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.arc .mobilebar a.primary {
+  background: var(--a-gold);
+  color: var(--espresso);
+}
+
+.arc .cookie {
+  box-shadow:
+    0 0 0 1px var(--a-gold-line),
+    0 30px 70px -36px rgba(27, 24, 21, 0.4);
+}
+
+/* ---------- forme de arcadă și de dinte pe fotografiile mari ---------- */
+.arc .member__photo,
+.arc .vid__docphoto {
+  border-radius: 46% 46% 26% 26% / 30% 30% 14% 14%;
+}
+
+.arc .prio__img,
+.arc .what__img,
+.arc .lead-post__img,
+.arc .art__img,
+.arc .gal__a {
+  border-radius: 50% 50% 24px 24px / 30% 30% 24px 24px;
+}
+
+.arc .prio__img .prio__badge {
+  top: auto;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+}
+
+/* imaginea de pe paginile de tratament: boltă (lată) sau dinte (portret), cu contur auriu decalat */
+.arc .tmedia__img {
+  border-radius: 50% 50% 28px 28px / 30% 30% 28px 28px;
+  box-shadow:
+    14px 14px 0 -1px var(--a-bg),
+    14px 14px 0 0 var(--a-gold);
+}
+
+.arc .tmedia--tall .tmedia__img {
+  border-radius: 46% 46% 26% 26% / 30% 30% 14% 14%;
+}
+
+.arc .tmedia__facts dd {
+  font-size: 1.04rem;
+}
+
+@media (max-width: 760px) {
+  .arc .tmedia__img {
+    box-shadow:
+      8px 8px 0 -1px var(--a-bg),
+      8px 8px 0 0 var(--a-gold);
+  }
+}

@@ -1,0 +1,272 @@
+---
+/**
+ * Arcada de tratamente: specializările așezate ca dinții pe o arcadă.
+ * Folosită pe homepage-ul variantei 3 și pe pagina Tratamente din versiunea Arcada.
+ */
+const archItems = (
+  [
+  { n: "Chirurgie dento-alveolară", d: "Extracții, chirurgie complexă și sinus lift, cu medic primar în chirurgie.", p: false, href: "/tratamente/chirurgie-dento-alveolara" },
+  { n: "Endodonție la microscop", d: "Tratamente de canal precise, realizate cu magnificație.", p: false, href: "/tratamente/endodontie-la-microscop" },
+  { n: "Implantologie", d: "Planificare cu radiologie internă, chirurgie de specialitate și coroana finală, cu aceeași echipă.", p: true, href: "/tratamente/implantologie" },
+  { n: "Parodontologie", d: "Specialitatea noastră de bază. Gingii care sângerează, retracții, dinți care se mișcă: se tratează.", p: true, href: "/tratamente/parodontologie" },
+  { n: "Estetică dentară", d: "Fațete, conturare, albire. Un zâmbet natural, pentru că pornește de la funcție.", p: true, href: "/tratamente/estetica-dentara" },
+  { n: "Injectări", d: "Restaurări estetice din compozit injectat, cu șlefuire minimă și în mai puține ședințe.", p: true, href: "/tratamente/injectari" },
+  { n: "Ortodonție", d: "Aparate fixe sau invizibile, pentru o aliniere corectă și o mușcătură sănătoasă.", p: false, href: "/tratamente/ortodontia" },
+  { n: "Pedodonție", d: "Pentru cei mici, cu răbdare. Pacienții ne spun că, aici, copiii nu se mai tem de dentist.", p: false, href: "/tratamente/pedodontia" },
+] as { n: string; d: string; p: boolean; href: string }[]
+).map((t, i, all) => {
+  const theta = ((168 - (i * 156) / (all.length - 1)) * Math.PI) / 180;
+  return {
+    ...t,
+    x: 50 + 44 * Math.cos(theta),
+    y: 10 + 74 * Math.sin(theta),
+    rot: ((theta * 180) / Math.PI - 90) * 0.22,
+  };
+});
+---
+
+      <div class="archmap" data-arch>
+        <svg class="archmap__curve" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 6 32 Q 50 150 94 32" fill="none" stroke="currentColor" stroke-width=".15" vector-effect="non-scaling-stroke" stroke-dasharray="2 3"></path>
+        </svg>
+        <div class="archmap__center" aria-live="polite">
+          <span class="archmap__k" data-arch-k>Întâi sănătatea, apoi estetica</span>
+          <span class="archmap__title" data-arch-t>Alege un tratament</span>
+          <span class="archmap__desc" data-arch-d>Asanarea vine înaintea esteticii. De la radiologie la tratamentul multidisciplinar, îți rezolvi aici orice problemă legată de dantură.</span>
+          <a class="archmap__link" href="/tratamente/parodontologie" data-arch-a>Începe cu parodontologia →</a>
+        </div>
+        <ul class="archmap__teeth">
+          {
+            archItems.map((t, i) => (
+              <li
+                class:list={["tooth", t.p && "tooth--p"]}
+                style={`--x:${t.x.toFixed(2)}%;--y:${t.y.toFixed(2)}%;--rot:${t.rot.toFixed(1)}deg;--i:${i}`}
+              >
+                <a href={t.href} data-n={t.n} data-d={t.d} data-k={t.p ? "Direcție prioritară" : "Și asta facem aici"}>
+                  <span class="tooth__n">{String(i + 1).padStart(2, "0")}</span>
+                  <span class="tooth__name">{t.n}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <p class="archmap__foot" data-fade>Plus stomatologie generală, igienizări, stomatologie restaurativă și diagnostic, pentru toată familia.</p>
+
+<script>
+  // Arcada: centrul arată tratamentul peste care ești
+  const arch = document.querySelector<HTMLElement>("[data-arch]");
+  if (arch) {
+    const box = arch.querySelector<HTMLElement>(".archmap__center")!;
+    const k = arch.querySelector<HTMLElement>("[data-arch-k]")!;
+    const ti = arch.querySelector<HTMLElement>("[data-arch-t]")!;
+    const d = arch.querySelector<HTMLElement>("[data-arch-d]")!;
+    const a = arch.querySelector<HTMLAnchorElement>("[data-arch-a]")!;
+    const teeth = [...arch.querySelectorAll<HTMLAnchorElement>(".tooth a")];
+    let cur: HTMLAnchorElement | null = null;
+    const pick = (el: HTMLAnchorElement) => {
+      if (cur === el) return;
+      cur = el;
+      teeth.forEach((t) => t.classList.toggle("is-on", t === el));
+      box.classList.add("is-swap");
+      setTimeout(() => {
+        k.textContent = el.dataset.k!;
+        ti.textContent = el.dataset.n!;
+        d.textContent = el.dataset.d!;
+        a.textContent = "Află mai multe →";
+        a.href = el.getAttribute("href")!;
+        box.classList.remove("is-swap");
+      }, 220);
+    };
+    teeth.forEach((t) => {
+      t.addEventListener("mouseenter", () => pick(t));
+      t.addEventListener("focus", () => pick(t));
+    });
+  }
+</script>
+
+<style>
+.archmap {
+    position: relative;
+    max-width: 1220px;
+    margin-inline: auto;
+    aspect-ratio: 16 / 8.6;
+  }
+
+  .archmap__curve {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: rgba(201, 178, 124, 0.5);
+  }
+
+  .archmap__center {
+    position: absolute;
+    left: 50%;
+    top: 4%;
+    transform: translateX(-50%);
+    width: min(520px, 46%);
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .archmap__k {
+    font-size: 0.74rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  .archmap__title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(2.2rem, 4.2vw, 4.4rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .archmap__desc {
+    max-width: 40ch;
+    color: color-mix(in srgb, var(--fg) 72%, transparent);
+  }
+
+  .archmap__link {
+    color: var(--amber);
+    border-bottom: 1px solid rgba(201, 178, 124, 0.5);
+    padding-bottom: 2px;
+  }
+
+  .archmap__center > * {
+    transition:
+      opacity 0.45s var(--ease),
+      transform 0.45s var(--ease);
+  }
+
+  .archmap__center:global(.is-swap) > * {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .tooth {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    transform: translate(-50%, -50%) rotate(var(--rot));
+  }
+
+  .tooth a {
+    display: grid;
+    align-content: space-between;
+    gap: 14px;
+    width: clamp(118px, 11vw, 150px);
+    height: clamp(140px, 13vw, 176px);
+    padding: 16px;
+    border-radius: 48px 48px 26px 26px;
+    background: var(--tooth);
+    border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
+    transition:
+      transform 0.7s var(--ease),
+      background 0.4s,
+      color 0.4s,
+      border-color 0.4s;
+  }
+
+  .tooth--p a {
+    width: clamp(132px, 12.6vw, 172px);
+    height: clamp(160px, 15vw, 206px);
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+  }
+
+  .tooth a:hover,
+  .tooth a:focus-visible,
+  .tooth a:global(.is-on) {
+    transform: translateY(-12px);
+    background: var(--gold);
+    color: var(--espresso);
+    border-color: var(--gold);
+  }
+
+  :global(.v3--light, .arc) .tooth a {
+    background: #e9e0d3;
+    border-color: transparent;
+  }
+
+  :global(.v3--light, .arc) .tooth--p a {
+    background: #fffdf9;
+    color: var(--fg);
+    border-color: rgba(168, 138, 82, 0.55);
+  }
+
+  :global(.v3--light, .arc) .tooth a:hover,
+  :global(.v3--light, .arc) .tooth a:global(.is-on) {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+  }
+
+  .tooth__n {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .tooth--p .tooth__n,
+  .tooth a:hover .tooth__n,
+  .tooth a:global(.is-on) .tooth__n {
+    color: #8a6a3e;
+  }
+
+  .tooth__name {
+    font-size: 0.98rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .tooth--p .tooth__name {
+    font-size: 1.12rem;
+  }
+
+  .archmap__foot {
+    margin-top: 28px;
+    text-align: center;
+    color: color-mix(in srgb, var(--fg) 55%, transparent);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 900px) {
+    .archmap {
+      aspect-ratio: auto;
+    }
+    .archmap__curve {
+      display: none;
+    }
+    .archmap__center {
+      position: static;
+      transform: none;
+      width: 100%;
+      margin-bottom: 32px;
+    }
+    .archmap__teeth {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .tooth {
+      position: static;
+      transform: none;
+    }
+    .tooth a,
+    .tooth--p a {
+      width: 100%;
+      height: 120px;
+      border-radius: 36px 36px 20px 20px;
+    }
+  }
+
+</style>

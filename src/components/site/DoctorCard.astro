@@ -1,0 +1,66 @@
+---
+import type { Doctor } from "@/data/doctors.ts";
+type Props = { d: Doctor; showQuote?: boolean; delay?: number };
+const { d, showQuote = false, delay = 0 } = Astro.props;
+---
+
+<article class="dcard" id={d.slug} data-fade style={`--d:${delay}ms`}>
+  <div class:list={["dcard__photo photo", d.cutout && "dcard__photo--cut"]}>
+    <img src={d.img} alt={d.name} loading="lazy" />
+  </div>
+  <h3 class="h3">{d.name}</h3>
+  <p class="small">{d.role}</p>
+  {showQuote && d.quote ? <p class="dcard__quote">„{d.quote}”</p> : <p class="dcard__bio">{d.bio}</p>}
+</article>
+
+<style>
+  .dcard {
+    display: grid;
+    align-content: start;
+    gap: 6px;
+  }
+
+  .dcard__photo {
+    aspect-ratio: 4 / 5;
+    margin-bottom: 18px;
+  }
+
+  .dcard__photo img {
+    object-position: 50% 14%;
+    transition: transform 1.4s var(--ease);
+  }
+
+  .dcard:hover .dcard__photo img {
+    transform: scale(1.04);
+  }
+
+  .dcard__photo--cut {
+    background: linear-gradient(180deg, #e9dfd1, #dccdb8);
+  }
+
+  .dcard__photo--cut img {
+    mix-blend-mode: multiply;
+    object-position: 50% 30%;
+    transform: scale(1.5);
+    transform-origin: 50% 26%;
+  }
+
+  .dcard:hover .dcard__photo--cut img {
+    transform: scale(1.56);
+  }
+
+  .dcard__quote {
+    margin-top: 12px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.15rem, 1.4vw, 1.35rem);
+    line-height: 1.3;
+    max-width: 32ch;
+  }
+
+  .dcard__bio {
+    margin-top: 10px;
+    color: var(--muted);
+    max-width: 40ch;
+  }
+</style>

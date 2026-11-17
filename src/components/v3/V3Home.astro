@@ -1,0 +1,1584 @@
+---
+/**
+ * Varianta 3 · „Lumină caldă”
+ * Cinematic și cald: espresso, chihlimbar, lumină difuză, granulație fină.
+ * Serif moale (Fraunces) + sans curat. Povestire la scroll.
+ */
+import Concept from "@/layouts/Concept.astro";
+import Clinic from "@/layouts/Clinic.astro";
+
+/** site: homepage-ul versiunii Arcada (nav, footer și meniu din site-ul complet). */
+type Props = { light?: boolean; site?: boolean };
+const { light = false, site = false } = Astro.props;
+import { CLINIC, DOCTORS, TEAM, REVIEWS, FAQS } from "@/consts.ts";
+import Mark from "@/components/brand/Mark.astro";
+import ArchMap from "@/components/v3/ArchMap.astro";
+
+const fonts =
+  "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500&display=swap";
+
+const promises = [
+  {
+    word: "În siguranță.",
+    title: "Fiecare caz, la medicul potrivit.",
+    text: "Medic primar în parodontologie, medic primar în chirurgie dento-alveolară, medic cu focus pe estetică funcțională. Fiecare caz ajunge la omul potrivit.",
+    img: "/img/g/fondatori.jpg",
+    pos: "50% 20%",
+  },
+  {
+    word: "Ascultat.",
+    title: "Un plan gândit pentru tine.",
+    text: "Nu un protocol standard. Îți explicăm ce vedem, ce opțiuni ai și ce urmează, pe înțeles. Fără grabă și fără presiune comercială.",
+    img: "/img/g/consult.jpg",
+    pos: "40% 50%",
+  },
+  {
+    word: "Încrezător.",
+    title: "Totul, într-un singur loc.",
+    text: "Radiologie internă, endodonție la microscop și o echipă care comunică real. De la diagnostic la ultimul control, fără să te plimbi între clinici.",
+    img: "/img/g/microscop-medic.jpg",
+    pos: "50% 30%",
+  },
+];
+
+const journey = [
+  ["Evaluare", "Ne spui ce te deranjează"],
+  ["Radiologie", "În clinică, pe loc"],
+  ["Plan", "Etape, ședințe, costuri"],
+  ["Tratament", "Echipa potrivită pentru fiecare etapă"],
+  ["Mentenanță", "Controale, ca rezultatul să rămână"],
+];
+
+// Tratamentele, așezate ca dinții pe o arcadă: prioritățile în față, restul spre „molari”
+
+const Wrap = site ? Clinic : Concept;
+const wrapProps = site
+  ? { bodyClass: "v3 v3--light", description: undefined }
+  : { title: light ? "Varianta 3 · deschis" : "Varianta 3", fonts, bodyClass: light ? "v3 v3--light" : "v3" };
+---
+
+<Wrap {...wrapProps}>
+
+  {!site && <header class="nav3" data-nav>
+    <a href="#" class="nav3__logo"><Mark class="nav3__mark" /><span>Esthetic <em>Dental</em> Center</span></a>
+    <nav class="nav3__links" aria-label="Principal">
+      <a href="#promisiuni">Clinica</a>
+      <a href="#tratamente">Tratamente</a>
+      <a href="#medici">Medici</a>
+      <a href="#intrebari">Întrebări</a>
+    </nav>
+    <div class="nav3__right">
+      <a class="nav3__phone" href={CLINIC.phoneHref}>{CLINIC.phone}</a>
+      <a class="btn3" href="#programare"><span class="hide-xs">Programează-te</span><span class="show-xs">Programare</span> <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>}
+
+  <!-- ================= HERO ================= -->
+  <section class="hero5">
+    <div class="wrap3 hero5__top" data-fade>
+      <span class="kicker3">Clinică stomatologică · Cluj-Napoca</span>
+      <span class="hero5__meta">Parodontologie · Estetică · Implantologie</span>
+    </div>
+    <div class="wrap3 hero5__grid">
+      <h1 class="hero5__h1">
+        <span class="hero5__t1" data-split>Lasă-ți zâmbetul</span>
+        <span class="hero5__t2" data-split><em>pe mâini bune.</em></span>
+      </h1>
+
+      <figure class="hero5__fig" data-fade style="--d:150ms">
+        <span class="hero5__outline" aria-hidden="true"></span>
+        <div class="hero5__tooth">
+          <img src="/img/g/portrait-warm.jpg" alt="Pacientă zâmbind, în recepția clinicii" data-parallax="0.04" />
+        </div>
+        <figcaption class="hero5__founders">
+          <img src="/img/g/fondatori.jpg" alt="" />
+          <span>Dr. Darius, Dr. Bianca și Dr. Alexandra<small>medicii fondatori</small></span>
+        </figcaption>
+      </figure>
+
+      <div class="hero5__lead" data-fade style="--d:400ms">
+        <p>O echipă de specialiști care lucrează împreună de peste un deceniu. Un singur plan, de la diagnostic la ultimul control, la 2 minute de Piața Unirii.</p>
+        <div class="hero5__cta">
+          <a class="btn3 btn3--gold btn3--lg" href="#programare">Programează o evaluare <span aria-hidden="true">↗</span></a>
+          <a class="hero5__urgent" href={CLINIC.phoneHref}>Urgență? <b>{CLINIC.phone}</b></a>
+        </div>
+      </div>
+
+      <ul class="hero5__facts" data-fade style="--d:550ms">
+        <li><span>i.</span>Medic primar în parodontologie</li>
+        <li><span>ii.</span>Radiologie internă, fără drumuri în plus</li>
+        <li><span>iii.</span>Plată în rate prin Star BT și TBI Bank</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= CIFRE ================= -->
+  <section class="stats3">
+    <div class="wrap3 stats3__grid">
+      {
+        [
+          [15, "+", "ani de experiență"],
+          [3000, "+", "proceduri documentate"],
+          [8, "", "specializări sub același acoperiș"],
+          [2, " min", "de Piața Unirii"],
+        ].map(([n, s, l], i) => (
+          <div class="stat3" data-fade style={`--d:${i * 120}ms`}>
+            <span class="stat3__n">
+              <span data-count={n}>{n}</span>
+              {s}
+            </span>
+            <span class="stat3__l">{l}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ================= PROMISIUNI (sticky) ================= -->
+  <section class="promises" id="promisiuni">
+    <div class="wrap3 promises__grid">
+      <div class="promises__sticky">
+        <p class="kicker3">Cum vrem să pleci de la noi</p>
+        <div class="promises__words" aria-hidden="true">
+          {promises.map((p, i) => <span class:list={["promises__word", i === 0 && "is-on"]} data-word={i}>{p.word}</span>)}
+        </div>
+        <div class="promises__bar"><span data-bar></span></div>
+      </div>
+      <div class="promises__panels">
+        {
+          promises.map((p, i) => (
+            <article class="panel3" data-panel={i}>
+              <div class="panel3__img">
+                <img src={p.img} alt="" loading="lazy" style={`object-position:${p.pos}`} data-parallax="0.05" />
+              </div>
+              <h2 class="panel3__mobileword">{p.word}</h2>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRATAMENTE: arcada ================= -->
+  <section class="treat3" id="tratamente">
+    <div class="wrap3">
+      <div class="head3 head3--center">
+        <p class="kicker3" data-fade>Tratamente</p>
+        <h2 class="t3x" data-split>Opt specializări.<br /><em>Un singur plan.</em></h2>
+      </div>
+
+      <ArchMap />
+    </div>
+  </section>
+
+  <!-- ================= MEDICI ================= -->
+  <section class="docs3" id="medici">
+    <div class="wrap3">
+      <div class="head3 head3--split">
+        <div>
+          <p class="kicker3 kicker3--dark" data-fade>Medicii fondatori</p>
+          <h2 class="t3x" data-split>Mâinile bune<br /><em>au nume.</em></h2>
+        </div>
+        <p class="lead3" data-fade>
+          Lucrează împreună de peste un deceniu. De aceea planurile lor sunt integrate, coerente și predictibile.
+        </p>
+      </div>
+      <div class="docs3__grid">
+        {
+          DOCTORS.map((d, i) => (
+            <article class="doc3" data-fade style={`--d:${i * 140}ms`}>
+              <div class="doc3__img">
+                <img src={d.img} alt={d.name} loading="lazy" />
+                <p class="doc3__hover">{d.text}</p>
+              </div>
+              <div class="doc3__meta">
+                <h3>{d.name}</h3>
+                <span>{d.role}</span>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      <div class="team3" data-fade>
+        {
+          TEAM.map((t) => (
+            <span>
+              <img src={t.img} alt="" loading="lazy" />
+              <b>{t.name}</b> · {t.role.replace("Medic specialist ", "")}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRASEU ================= -->
+  <section class="journey" data-journey>
+    <div class="wrap3">
+      <div class="head3 head3--center">
+        <p class="kicker3" data-fade>Totul într-un singur loc</p>
+        <h2 class="t3x" data-split>De la prima vizită<br /><em>la ultimul control.</em></h2>
+      </div>
+      <ol class="journey__line">
+        <span class="journey__track" aria-hidden="true"><span data-jfill></span></span>
+        {
+          journey.map(([t, d], i) => (
+            <li data-fade style={`--d:${i * 120}ms`}>
+              <span class="journey__dot" aria-hidden="true" />
+              <span class="journey__n">0{i + 1}</span>
+              <h3>{t}</h3>
+              <p>{d}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= RECENZIE care se aprinde la scroll ================= -->
+  <section class="lit" data-lit>
+    <div class="lit__sticky">
+      <div class="wrap3 lit__inner">
+        <p class="kicker3">Recenzie Google</p>
+        <blockquote class="lit__quote" data-lit-q>
+          Recomand cu drag. Atât eu, cât și toată familia mea am beneficiat de calitatea serviciilor. Medici profesioniști, care te tratează cu multă atenție și îți dau încredere că totul va fi bine. Copiii mei nu au frică de dentist.
+        </blockquote>
+        <p class="lit__who">Alexandru Crețu <span>· pacient, împreună cu toată familia</span></p>
+        <ul class="lit__others">
+          {REVIEWS.filter((r) => r.who !== "Alexandru Crețu").map((r) => <li><span>★★★★★</span> {r.who}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RATE + FAQ ================= -->
+  <section class="faq3" id="intrebari">
+    <div class="wrap3 faq3__grid">
+      <div class="faq3__left">
+        <p class="kicker3 kicker3--dark" data-fade>Întrebări frecvente</p>
+        <h2 class="t3x" data-split>Răspunsuri,<br /><em>înainte să suni.</em></h2>
+        <div class="rate3" data-fade>
+          <span class="rate3__icon" aria-hidden="true">%</span>
+          <div>
+            <b>Plată în rate</b>
+            <p>Prin Star BT și TBI Bank, pentru planurile mai ample.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq" data-fade>
+        {
+          FAQS.map(([q, a], i) => (
+            <details name="faq" open={i === 0}>
+              <summary>
+                {q}
+                <span class="pm" aria-hidden="true" />
+              </summary>
+              <p class="answer">{a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="cta3" id="programare">
+    <div class="wrap3 cta3__inner">
+      <p class="kicker3" data-fade>Programare</p>
+      <h2 class="cta3__title" data-split>Primul pas<br />e o <em>conversație.</em></h2>
+      <p class="lead3" data-fade>Ne spui ce te deranjează, noi îți explicăm ce vedem. Pleci cu un plan clar și fără nicio obligație.</p>
+      <div class="cta3__actions" data-fade>
+        <a class="btn3 btn3--gold btn3--lg" href={site ? "/contact#programare" : "#"}>Programează online <span aria-hidden="true">↗</span></a>
+        <a class="btn3 btn3--line btn3--lg" href={CLINIC.whatsapp}>Scrie-ne pe WhatsApp</a>
+      </div>
+
+      <div class="cards3">
+        <div class="card3" data-fade>
+          <span class="card3__k">Telefon</span>
+          <a href={CLINIC.phoneHref}>{CLINIC.phone}</a>
+          <a class="small3" href={`mailto:${CLINIC.email}`}>{CLINIC.email}</a>
+        </div>
+        <div class="card3" data-fade style="--d:120ms">
+          <span class="card3__k">Unde</span>
+          <span>Lângă intrarea în Piața Muzeului</span>
+          <span class="small3">Parcare în Piața Unirii, apoi 2 minute pe jos. Orice linie cu stație în Piața Unirii.</span>
+        </div>
+        <div class="card3" data-fade style="--d:240ms">
+          <span class="card3__k">Program</span>
+          <ul>
+            {
+              CLINIC.hours.map(([d, h]) => (
+                <li>
+                  <span>{d}</span>
+                  <span>{h}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {!site && <footer class="foot3">
+    <p class="foot3__big" aria-hidden="true"><Mark class="foot3__mark" />Esthetic <em>Dental</em></p>
+    <div class="wrap3 foot3__row">
+      <span>© 2026 Esthetic Dental Center · Concept de design, varianta 3</span>
+      <span>
+        <a href={CLINIC.social.instagram}>Instagram</a> · <a href={CLINIC.social.facebook}>Facebook</a> ·
+        <a href={CLINIC.social.tiktok}>TikTok</a> · <a href={CLINIC.social.youtube}>YouTube</a>
+      </span>
+      <span>Termeni · Confidențialitate · Cookie-uri</span>
+    </div>
+  </footer>}
+</Wrap>
+
+<script>
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clamp = (v: number) => Math.min(1, Math.max(0, v));
+
+  // Promisiuni: cuvântul din stânga urmează panoul din dreapta
+  const words = [...document.querySelectorAll<HTMLElement>("[data-word]")];
+  const panels = [...document.querySelectorAll<HTMLElement>("[data-panel]")];
+  const bar = document.querySelector<HTMLElement>("[data-bar]");
+  // Traseu: linia se umple la scroll
+  const journey = document.querySelector<HTMLElement>("[data-journey]");
+  const jfill = document.querySelector<HTMLElement>("[data-jfill]");
+
+  const onScroll = () => {
+    if (panels.length) {
+      let active = 0;
+      panels.forEach((pn, i) => {
+        if (pn.getBoundingClientRect().top < innerHeight * 0.55) active = i;
+      });
+      words.forEach((w, i) => w.classList.toggle("is-on", i === active));
+      if (bar) bar.style.transform = `scaleX(${(active + 1) / panels.length})`;
+    }
+    if (journey && jfill) {
+      const r = journey.getBoundingClientRect();
+      const p = reduce ? 1 : clamp((innerHeight * 0.8 - r.top) / (r.height * 0.8));
+      jfill.style.transform = `scaleX(${p})`;
+    }
+  };
+  addEventListener("scroll", () => requestAnimationFrame(onScroll), { passive: true });
+  addEventListener("resize", onScroll);
+  onScroll();
+
+
+  // Cifre care cresc când intră în ecran
+  const io = new IntersectionObserver(
+    (es) =>
+      es.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target as HTMLElement;
+        io.unobserve(el);
+        const to = Number(el.dataset.count);
+        if (reduce) return;
+        const t0 = performance.now();
+        const dur = 1800;
+        const fmt = (n: number) => n.toLocaleString("ro-RO");
+        const step = (t: number) => {
+          const k = clamp((t - t0) / dur);
+          const eased = 1 - Math.pow(1 - k, 4);
+          el.textContent = fmt(Math.round(to * eased));
+          if (k < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }),
+    { threshold: 0.6 },
+  );
+  document.querySelectorAll("[data-count]").forEach((el) => {
+    (el as HTMLElement).textContent = Number((el as HTMLElement).dataset.count).toLocaleString("ro-RO");
+    io.observe(el);
+  });
+
+</script>
+
+<style is:global>
+  .v3 {
+    --paper: #f4ebdf;
+    --bone: #eadfcf;
+    --sand: #dccab2;
+    --ink: #1c1410;
+    --muted: #8a7a6b;
+    --line: rgba(22, 20, 18, 0.14);
+    --terracotta: #8a6a3e;
+    --espresso: #161412;
+    --cocoa: #201d1a;
+    --amber: #c9b27c;
+    --gold: #c9b27c;
+    --sand: #dacbbb;
+    --cream: #f3eee6;
+    --bg: #161412;
+    --bg2: #201d1a;
+    --fg: #f3eee6;
+    --mat: #f3eee6;
+    --tooth: #2a2622;
+    --alt-bg: #f3eee6;
+    --alt-fg: #161412;
+    --alt-muted: #8a7a6b;
+    --alt-accent: #8a6a3e;
+    --alt-surface: #eadfcf;
+    --serif: "Fraunces", "Times New Roman", serif;
+    --sans: "Inter Tight", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+  }
+
+  .v3.v3--light {
+    --bg: #f4efe7;
+    --bg2: #ebe3d6;
+    --fg: #1b1815;
+    --mat: #ffffff;
+    --tooth: #fbf8f3;
+    --alt-bg: #1b1815;
+    --alt-fg: #f3eee6;
+    --alt-muted: #a89c8f;
+    --alt-accent: #c9b27c;
+    --alt-surface: #2a2622;
+    --gold: #a88a52;
+    --amber: #a88a52;
+    --sand: #8a6a3e;
+  }
+
+  .v3 .docs3,
+  .v3 .faq3 {
+    --ink: var(--alt-fg);
+    --muted: var(--alt-muted);
+    --paper: var(--alt-bg);
+    --line: color-mix(in srgb, var(--alt-fg) 14%, transparent);
+  }
+
+  .v3 em,
+  .v3 .serif {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 30, "WONK" 0;
+    letter-spacing: -0.02em;
+  }
+
+  .v3 .faq summary .pm {
+    border-color: var(--line);
+  }
+</style>
+
+<style>
+  .wrap3 {
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .kicker3 {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.76rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--fg) 60%, transparent);
+  }
+
+  .kicker3::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    width: 18px;
+    height: 1px;
+    border-radius: 0;
+    background: var(--gold);
+  }
+
+  .kicker3--dark {
+    color: var(--muted);
+  }
+
+  .t3x {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(2.5rem, 5.6vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .t3x em {
+    color: var(--sand);
+    font-size: 1.04em;
+  }
+
+  .lead3 {
+    max-width: 44ch;
+    font-size: clamp(1.02rem, 1.2vw, 1.18rem);
+    color: color-mix(in srgb, var(--fg) 70%, transparent);
+  }
+
+  .head3 {
+    display: grid;
+    gap: 22px;
+    margin-bottom: clamp(48px, 6vw, 96px);
+  }
+
+  .head3--center {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .head3--split {
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 28px 64px;
+  }
+
+  .head3--split > div {
+    display: grid;
+    gap: 22px;
+  }
+
+  @media (max-width: 860px) {
+    .head3--split {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- buttons ---------- */
+  .btn3 {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 0.95rem;
+    white-space: nowrap;
+    transition:
+      transform 0.5s var(--ease),
+      box-shadow 0.5s var(--ease),
+      background 0.4s;
+  }
+
+  .btn3:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn3--gold {
+    background: var(--gold);
+    color: var(--espresso);
+  }
+
+  .btn3--gold:hover {
+    background: #d8c494;
+  }
+
+  .btn3--line {
+    background: transparent;
+    color: var(--fg);
+    border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  }
+
+  .btn3--lg {
+    min-height: 60px;
+    padding: 0 30px;
+    font-size: 1.02rem;
+  }
+
+  /* ---------- nav ---------- */
+  .nav3 {
+    position: fixed;
+    z-index: 60;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1180px, calc(100% - 24px));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 8px 8px 22px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    border: 1px solid rgba(201, 178, 124, 0.22);
+    transition: transform 0.6s var(--ease);
+  }
+
+  .nav3:global(.is-hidden) {
+    transform: translate(-50%, -150%);
+  }
+
+  .nav3__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.02rem;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .nav3__logo em {
+    color: var(--gold);
+    font-size: 1.15em;
+  }
+
+  .nav3__links {
+    display: flex;
+    gap: 28px;
+    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--fg) 75%, transparent);
+  }
+
+  .nav3__links a:hover {
+    color: var(--fg);
+  }
+
+  .nav3__right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .nav3__phone {
+    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--fg) 80%, transparent);
+  }
+
+  @media (max-width: 1020px) {
+    .nav3__links,
+    .nav3__phone {
+      display: none;
+    }
+  }
+
+  .show-xs {
+    display: none;
+  }
+
+  @media (max-width: 520px) {
+    .hide-xs {
+      display: none;
+    }
+    .show-xs {
+      display: inline;
+    }
+    .nav3 {
+      padding-left: 16px;
+    }
+    .nav3 .btn3 {
+      padding: 0 16px;
+      font-size: 0.85rem;
+    }
+    .nav3__logo {
+      font-size: 0.92rem;
+    }
+  }
+
+  /* ---------- hero ---------- */
+  .hero5 {
+    padding: clamp(104px, 14vh, 150px) 0 clamp(56px, 7vw, 110px);
+    border-bottom: 1px solid rgba(201, 178, 124, 0.25);
+  }
+
+  .hero5__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid color-mix(in srgb, var(--fg) 14%, transparent);
+  }
+
+  .hero5__meta {
+    font-family: var(--serif);
+    font-style: italic;
+    color: color-mix(in srgb, var(--fg) 60%, transparent);
+  }
+
+  .hero5__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(12px, 1.6vw, 24px);
+    margin-top: clamp(28px, 4vw, 56px);
+  }
+
+  .hero5__h1 {
+    display: contents;
+    font-weight: 300;
+  }
+
+  .hero5__t1,
+  .hero5__t2 {
+    font-size: clamp(3rem, 8.4vw, 9.6rem);
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+    white-space: nowrap;
+  }
+
+  .hero5__t1 {
+    grid-column: 1 / 9;
+    grid-row: 1;
+  }
+
+  .hero5__t2 {
+    grid-column: 2 / 9;
+    grid-row: 2;
+    margin-top: 0.06em;
+  }
+
+  .hero5__t2 em {
+    color: var(--sand);
+    letter-spacing: -0.03em;
+    font-size: 1.05em;
+  }
+
+  .hero5__fig {
+    position: relative;
+    grid-column: 9 / 13;
+    grid-row: 1 / 5;
+    margin: 0;
+    align-self: start;
+  }
+
+  .hero5__tooth,
+  .hero5__outline {
+    aspect-ratio: 3 / 4;
+    border-radius: 46% 46% 26% 26% / 30% 30% 14% 14%;
+  }
+
+  .hero5__tooth {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg2);
+  }
+
+  .hero5__tooth img {
+    width: 100%;
+    height: 110%;
+    margin-top: -5%;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+
+  .hero5__outline {
+    position: absolute;
+    inset: 0;
+    transform: translate(14px, 14px);
+    border: 1px solid var(--gold);
+  }
+
+  .hero5__founders {
+    position: absolute;
+    left: -12%;
+    bottom: 9%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 18px 8px 8px;
+    border-radius: 999px;
+    background: var(--bg);
+    border: 1px solid rgba(201, 178, 124, 0.35);
+    font-size: 0.85rem;
+    line-height: 1.25;
+  }
+
+  .hero5__founders img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+
+  .hero5__founders small {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95em;
+    color: color-mix(in srgb, var(--fg) 55%, transparent);
+  }
+
+  .hero5__lead {
+    grid-column: 1 / 6;
+    grid-row: 3;
+    margin-top: clamp(32px, 4vw, 64px);
+  }
+
+  .hero5__lead p {
+    max-width: 42ch;
+    color: color-mix(in srgb, var(--fg) 68%, transparent);
+  }
+
+  .hero5__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 26px;
+    margin-top: 28px;
+  }
+
+  .hero5__urgent {
+    font-size: 0.92rem;
+    color: color-mix(in srgb, var(--fg) 70%, transparent);
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(201, 178, 124, 0.5);
+  }
+
+  .hero5__urgent b {
+    font-weight: 400;
+    color: var(--fg);
+  }
+
+  .hero5__facts {
+    grid-column: 6 / 9;
+    grid-row: 3;
+    align-self: end;
+    margin-top: clamp(32px, 4vw, 64px);
+    border-top: 1px solid color-mix(in srgb, var(--fg) 14%, transparent);
+  }
+
+  .hero5__facts li {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--fg) 14%, transparent);
+    font-size: 0.92rem;
+    color: color-mix(in srgb, var(--fg) 80%, transparent);
+  }
+
+  .hero5__facts span {
+    width: 26px;
+    flex: none;
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  @media (max-width: 1100px) {
+    .hero5__t1,
+    .hero5__t2 {
+      white-space: normal;
+    }
+    .hero5__facts {
+      grid-column: 1 / 9;
+      grid-row: 4;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .hero5__grid {
+      grid-template-columns: 1fr;
+    }
+    .hero5__t1,
+    .hero5__t2,
+    .hero5__fig,
+    .hero5__lead,
+    .hero5__facts {
+      grid-column: 1;
+      grid-row: auto;
+    }
+    .hero5__t1,
+    .hero5__t2 {
+      font-size: clamp(2.9rem, 14vw, 4.4rem);
+    }
+    .hero5__t2 {
+      margin-left: 8vw;
+    }
+    .hero5__fig {
+      width: 78%;
+      justify-self: end;
+      margin-top: 32px;
+    }
+    .hero5__founders {
+      left: -18%;
+    }
+    .hero5__meta {
+      display: none;
+    }
+  }
+
+  /* ---------- stats ---------- */
+  .stats3 {
+    padding-block: clamp(64px, 8vw, 120px);
+    border-bottom: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
+  }
+
+  .stats3__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .stat3 {
+    display: grid;
+    gap: 8px;
+  }
+
+  .stat3__n {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat3__l {
+    color: color-mix(in srgb, var(--fg) 60%, transparent);
+    max-width: 18ch;
+  }
+
+  @media (max-width: 760px) {
+    .stats3__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 20px;
+    }
+  }
+
+  /* ---------- promises ---------- */
+  .promises {
+    padding-block: clamp(80px, 10vw, 160px);
+  }
+
+  .promises__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 100px);
+  }
+
+  .promises__sticky {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+  }
+
+  .promises__words {
+    display: grid;
+  }
+
+  .promises__word {
+    grid-area: 1 / 1;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(3.2rem, 7vw, 8rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--sand);
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.9s var(--ease),
+      transform 0.9s var(--ease);
+  }
+
+  .promises__word:global(.is-on) {
+    opacity: 1;
+    transform: none;
+  }
+
+  .promises__bar {
+    width: 160px;
+    height: 2px;
+    background: color-mix(in srgb, var(--fg) 14%, transparent);
+  }
+
+  .promises__bar span {
+    display: block;
+    height: 100%;
+    background: var(--amber);
+    transform-origin: left;
+    transform: scaleX(0.33);
+    transition: transform 0.8s var(--ease);
+  }
+
+  .promises__panels {
+    display: grid;
+  }
+
+  .panel3 {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 6svh;
+  }
+
+  .panel3__img {
+    height: min(58svh, 560px);
+    overflow: hidden;
+    border-radius: 28px;
+    margin-bottom: 28px;
+    background: var(--bg2);
+  }
+
+  .panel3__img img {
+    width: 100%;
+    height: 116%;
+    margin-top: -8%;
+    object-fit: cover;
+    filter: sepia(0.2) saturate(0.95);
+  }
+
+  .panel3 h3 {
+    font-weight: 400;
+    font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+
+  .panel3 p {
+    color: color-mix(in srgb, var(--fg) 70%, transparent);
+    max-width: 46ch;
+  }
+
+  .panel3__mobileword {
+    display: none;
+  }
+
+  @media (max-width: 860px) {
+    .promises__grid {
+      grid-template-columns: 1fr;
+    }
+    .promises__sticky {
+      position: static;
+      height: auto;
+    }
+    .promises__words,
+    .promises__bar {
+      display: none;
+    }
+    .promises__panels {
+      gap: 72px;
+      padding-block: 24px 0;
+    }
+    .panel3 {
+      min-height: 0;
+      padding: 0;
+    }
+    .panel3__img {
+      height: auto;
+      aspect-ratio: 4 / 4.4;
+    }
+    .panel3__mobileword {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 2.8rem;
+      color: var(--amber);
+    }
+  }
+
+  /* ---------- treatments: arcada ---------- */
+  .treat3 {
+    padding-block: clamp(80px, 10vw, 160px);
+    background: var(--bg2);
+    overflow: hidden;
+  }
+
+  
+  /* ---------- doctors ---------- */
+  .docs3 {
+    padding-block: clamp(96px, 11vw, 170px);
+    background: var(--alt-bg);
+    color: var(--alt-fg);
+  }
+
+  .docs3 .lead3 {
+    color: var(--alt-muted);
+  }
+
+  .docs3 .t3x em {
+    color: var(--alt-accent);
+  }
+
+  .docs3__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(14px, 1.8vw, 24px);
+  }
+
+  .doc3__img {
+    position: relative;
+    aspect-ratio: 3 / 3.9;
+    overflow: hidden;
+    border-radius: 28px;
+    background: #e4d8c9;
+  }
+
+  .doc3__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+    transition:
+      transform 1.4s var(--ease),
+      filter 0.8s;
+  }
+
+  .doc3__hover {
+    position: absolute;
+    inset: auto 14px 14px;
+    padding: 18px 20px;
+    border-radius: 18px;
+    background: var(--espresso);
+    color: var(--cream);
+    font-size: 0.95rem;
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s var(--ease),
+      transform 0.6s var(--ease);
+  }
+
+  .doc3:hover .doc3__hover {
+    opacity: 1;
+    transform: none;
+  }
+
+  .doc3:hover .doc3__img img {
+    transform: scale(1.04);
+  }
+
+  .doc3__meta {
+    display: grid;
+    gap: 4px;
+    padding: 20px 6px 0;
+  }
+
+  .doc3__meta h3 {
+    font-weight: 400;
+    font-size: clamp(1.4rem, 1.9vw, 1.9rem);
+    letter-spacing: -0.03em;
+  }
+
+  .doc3__meta span {
+    color: var(--alt-muted);
+  }
+
+  .team3 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 40px;
+  }
+
+  .team3 span {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 16px 6px 6px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    font-size: 0.9rem;
+    color: var(--alt-muted);
+  }
+
+  .team3 b {
+    font-weight: 400;
+    color: var(--alt-fg);
+  }
+
+  .team3 img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 22%;
+    background: var(--sand);
+    mix-blend-mode: multiply;
+  }
+
+  @media (hover: none) {
+    .doc3__hover {
+      position: static;
+      opacity: 1;
+      transform: none;
+      margin: 0;
+      background: none;
+      color: var(--alt-muted);
+      padding: 10px 6px 0;
+      backdrop-filter: none;
+    }
+    .doc3__img {
+      overflow: visible;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .docs3__grid {
+      grid-template-columns: 1fr;
+      max-width: 460px;
+      margin-inline: auto;
+      gap: 48px;
+    }
+  }
+
+  /* ---------- journey ---------- */
+  .journey {
+    padding-block: clamp(96px, 11vw, 170px);
+    background: var(--bg);
+  }
+
+  .journey__line {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+  }
+
+  .journey__track {
+    position: absolute;
+    top: 7px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: color-mix(in srgb, var(--fg) 14%, transparent);
+  }
+
+  .journey__track span {
+    display: block;
+    height: 100%;
+    background: var(--gold);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  .journey__line li {
+    position: relative;
+    padding-top: 42px;
+  }
+
+  .journey__dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--amber);
+  }
+
+  .journey__n {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--amber);
+  }
+
+  .journey__line h3 {
+    margin: 6px 0 8px;
+    font-weight: 400;
+    font-size: clamp(1.3rem, 1.7vw, 1.7rem);
+    letter-spacing: -0.03em;
+  }
+
+  .journey__line p {
+    color: color-mix(in srgb, var(--fg) 60%, transparent);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 860px) {
+    .journey__line {
+      grid-template-columns: 1fr;
+      padding-left: 32px;
+      gap: 32px;
+    }
+    .journey__track {
+      top: 0;
+      bottom: 0;
+      left: 7px;
+      right: auto;
+      width: 1px;
+      height: auto;
+    }
+    .journey__track span {
+      transform: none !important;
+      background: var(--amber);
+    }
+    .journey__line li {
+      padding-top: 0;
+    }
+    .journey__dot {
+      left: -32px;
+      top: 4px;
+    }
+  }
+
+  /* ---------- review that lights up ---------- */
+  .lit {
+    position: relative;
+    height: 165svh;
+  }
+
+  .lit__sticky {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    display: grid;
+    align-items: center;
+    background: var(--bg2);
+  }
+
+  .lit__inner {
+    display: grid;
+    gap: 28px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .lit__quote {
+    max-width: 24ch;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.9rem, 4.3vw, 4.6rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  .lit__quote :global(.lw) {
+    color: color-mix(in srgb, var(--fg) 16%, transparent);
+    transition: color 0.5s;
+  }
+
+  .lit__quote :global(.lw.on) {
+    color: var(--fg);
+  }
+
+  .lit__quote :global(.lw.hot) {
+    color: var(--sand);
+    font-style: italic;
+  }
+
+  .lit__who {
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .lit__who span {
+    color: color-mix(in srgb, var(--fg) 50%, transparent);
+  }
+
+  .lit__others {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 22px;
+    font-size: 0.85rem;
+    color: color-mix(in srgb, var(--fg) 50%, transparent);
+  }
+
+  .lit__others span {
+    color: var(--amber);
+    letter-spacing: 0.1em;
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 760px) {
+    .lit {
+      height: 150svh;
+    }
+  }
+
+  /* ---------- faq ---------- */
+  .faq3 {
+    padding-block: clamp(96px, 11vw, 170px);
+    background: var(--alt-bg);
+    color: var(--alt-fg);
+  }
+
+  .faq3 .t3x em {
+    color: var(--alt-accent);
+  }
+
+  .faq3__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 48px clamp(32px, 6vw, 120px);
+  }
+
+  .faq3__left {
+    display: grid;
+    gap: 22px;
+    align-content: start;
+  }
+
+  .rate3 {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-top: 24px;
+    padding: 20px;
+    border-radius: 20px;
+    background: var(--alt-surface);
+  }
+
+  .rate3__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--alt-fg);
+    color: var(--amber);
+    font-family: var(--serif);
+    font-size: 1.4rem;
+  }
+
+  .rate3 b {
+    font-weight: 500;
+  }
+
+  .rate3 p {
+    color: var(--alt-muted);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 860px) {
+    .faq3__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- CTA ---------- */
+  .cta3 {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(110px, 13vw, 200px) clamp(80px, 8vw, 120px);
+    text-align: center;
+  }
+
+  .cta3__inner {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 26px;
+  }
+
+  .cta3__title {
+    font-weight: 300;
+    font-size: clamp(3rem, 8vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+  }
+
+  .cta3__title em {
+    color: var(--sand);
+  }
+
+  .cta3__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .cards3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    width: 100%;
+    margin-top: clamp(48px, 6vw, 88px);
+    text-align: left;
+  }
+
+  .card3 {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    padding: 28px;
+    border-radius: 24px;
+    background: transparent;
+    border: 1px solid rgba(201, 178, 124, 0.22);
+  }
+
+  .card3__k {
+    font-size: 0.74rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  .card3 > a:first-of-type {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .small3 {
+    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--fg) 60%, transparent);
+  }
+
+  .card3 li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 860px) {
+    .cards3 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- footer ---------- */
+  .foot3 {
+    overflow: hidden;
+    padding-bottom: 28px;
+  }
+
+  .foot3__big {
+    font-weight: 300;
+    font-size: clamp(3.6rem, 15vw, 17rem);
+    line-height: 0.8;
+    letter-spacing: -0.065em;
+    white-space: nowrap;
+    text-align: center;
+    color: var(--fg);
+  }
+
+  :global(.foot3__mark) {
+    display: inline-block;
+    height: 0.78em;
+    width: auto;
+    margin-right: 0.1em;
+    vertical-align: -0.02em;
+  }
+
+  :global(.nav3__mark) {
+    height: 28px;
+    width: auto;
+    flex: none;
+  }
+
+  .foot3__big em {
+    color: var(--sand);
+  }
+
+  .foot3__row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
+    font-size: 0.82rem;
+    color: color-mix(in srgb, var(--fg) 50%, transparent);
+  }
+</style>

@@ -1,0 +1,17 @@
+---
+import Legal from "@/components/site/Legal.astro";
+const sections: [string, string][] = [
+  ["Cine suntem", "Denumirea firmei care operează clinica, CUI, adresa sediului, datele de contact."],
+  ["Folosirea site-ului", "Condițiile în care poate fi folosit site-ul și ce nu este permis."],
+  ["Informațiile medicale de pe site", "Textele au rol informativ și nu înlocuiesc consultația. Diagnosticul și planul de tratament se stabilesc doar după evaluare."],
+  ["Programări și anulări", "Cum se face o programare prin telefon, WhatsApp sau formular, cum se confirmă și cum se anulează."],
+  ["Prețuri", "Prețurile afișate sunt orientative. Prețul final se stabilește după evaluare și se comunică înainte de tratament, prin deviz."],
+  ["Plata în rate", "Plata în rate se face prin partenerii Star BT și TBI Bank, conform condițiilor acestora."],
+  ["Proprietate intelectuală", "Textele, fotografiile, videourile și elementele de identitate vizuală aparțin clinicii."],
+  ["Limitarea răspunderii", "Limitele răspunderii pentru informațiile de pe site și pentru linkurile externe."],
+  ["Legea aplicabilă și litigii", "Legea română, instanțele competente și soluționarea alternativă a litigiilor (ANPC, SAL, SOL)."],
+  ["Contact", "Cum ne contactezi pentru orice întrebare legată de acești termeni."],
+];
+---
+
+<Legal title="Termeni și condiții" titleA="Termeni și" titleB="condiții" intro="Regulile de folosire a site-ului și a serviciilor de programare." sections={sections} />
