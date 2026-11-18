@@ -315,12 +315,16 @@ em,
     transform 0.6s var(--ease);
 }
 
-.nav.is-solid {
-  background: rgba(247, 242, 234, 0.82);
+/* pe paginile fără hero foto, meniul are fundal de la început; la scroll, pe toate, e aproape opac */
+.nav.is-solid,
+.nav.nav--ink {
+  background: rgba(247, 242, 234, 0.96);
   backdrop-filter: blur(18px) saturate(1.2);
   -webkit-backdrop-filter: blur(18px) saturate(1.2);
   color: var(--ink);
-  box-shadow: 0 1px 0 var(--line);
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 14px 34px -22px rgba(31, 24, 19, 0.28);
 }
 
 .nav.is-hidden {
@@ -1139,15 +1143,6 @@ img.duotone {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-}
-
-.pimg {
-  height: clamp(320px, 70vh, 780px);
-}
-
-.pimg img {
-  height: 120%;
-  margin-top: -10%;
 }
 
 .split {

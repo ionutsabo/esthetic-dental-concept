@@ -43,9 +43,12 @@ const gear = [
       </div>
     </div>
   </section>
-  <div class="frame pimg photo" data-img>
-    <img src="/img/g/fondatori.jpg" alt="Dr. Alexandra Birta, Dr. Darius Tomina și Dr. Bianca Tomina, în recepția clinicii" data-parallax="0.06" style="object-position: 50% 30%" />
-  </div>
+  <figure class="wrap about-photo" data-fade>
+    <div class="about-photo__img photo" data-img>
+      <img src="/img/g/fondatori.jpg" alt="Dr. Alexandra Birta, Dr. Darius Tomina și Dr. Bianca Tomina, în recepția clinicii" />
+    </div>
+    <figcaption class="small">De la stânga la dreapta: Dr. Alexandra Birta, Dr. Darius Tomina și Dr. Bianca Tomina, medicii fondatori.</figcaption>
+  </figure>
 
   <!-- poveste -->
   <section class="section">
@@ -178,6 +181,28 @@ const gear = [
 </Layout>
 
 <style>
+  /* poza cu medicii apare întreagă, în proporția ei (3:2), fără tăieturi; nu depășește înălțimea ecranului */
+  .about-photo {
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+  }
+
+  .about-photo__img {
+    width: min(100%, calc(86svh * 1.5));
+    aspect-ratio: 3 / 2;
+  }
+
+  .about-photo__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-photo figcaption {
+    width: min(100%, calc(86svh * 1.5));
+  }
+
   .cols3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

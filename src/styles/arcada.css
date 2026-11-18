@@ -152,7 +152,7 @@
   transform: translateX(-50%);
   width: min(1240px, calc(100% - 24px));
   padding: 8px 8px 8px 22px;
-  background: color-mix(in srgb, var(--a-bg) 95%, transparent);
+  background: color-mix(in srgb, var(--a-bg) 97%, transparent);
   border: 1px solid var(--a-gold-line);
   color: var(--a-ink);
   box-shadow: none;
@@ -248,21 +248,16 @@
   font-size: 1.04em;
 }
 
-/* imaginea mare de sub titlu: boltă de arcadă, cu contur auriu decalat */
-.arc .pimg,
-.arc .phero__img {
-  width: calc(100% - 2 * var(--gutter));
-  max-width: calc(1400px - 2 * var(--gutter));
-  margin: 0 auto clamp(24px, 3vw, 40px);
-  border-radius: 50% 50% 28px 28px / clamp(120px, 22vw, 340px) clamp(120px, 22vw, 340px) 28px 28px;
+/* poza cu medicii de pe Despre noi: boltă de arcadă, cu contur auriu decalat. Poza rămâne întreagă. */
+.arc .about-photo__img {
+  border-radius: 50% 50% 28px 28px / clamp(80px, 14vw, 220px) clamp(80px, 14vw, 220px) 28px 28px;
   box-shadow:
     14px 14px 0 -1px var(--a-bg),
     14px 14px 0 0 var(--a-gold);
 }
 
 @media (max-width: 760px) {
-  .arc .pimg,
-  .arc .phero__img {
+  .arc .about-photo__img {
     box-shadow:
       8px 8px 0 -1px var(--a-bg),
       8px 8px 0 0 var(--a-gold);
