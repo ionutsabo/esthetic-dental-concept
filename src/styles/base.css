@@ -234,8 +234,6 @@
 .theme-light,
 .theme-dark .theme-invert,
 .theme-brand .theme-invert {
-  color-scheme: light;
-
   --background: var(--light-300);
   --background-2: var(--light-200);
   --background-3: var(--light-100);
@@ -270,8 +268,6 @@
 
 .theme-dark,
 .theme-light .theme-invert {
-  color-scheme: dark;
-
   --background: var(--dark-900);
   --background-2: var(--dark-800);
   --background-3: var(--dark-700);
@@ -305,8 +301,6 @@
 }
 
 .theme-brand {
-  color-scheme: dark;
-
   --background: var(--brand-500);
   --background-2: color-mix(in lab, var(--background) 90%, var(--text));
   --background-3: color-mix(in lab, var(--background) 80%, var(--text));

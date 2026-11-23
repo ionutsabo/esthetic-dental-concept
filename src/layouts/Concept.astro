@@ -6,6 +6,7 @@
  */
 import "@/styles/clinic.css";
 import { SITE_NAME, SITE_DESCRIPTION, CLINIC } from "@/consts.ts";
+import ColorScheme from "@/components/utility/ColorScheme.astro";
 
 type Props = {
   title?: string;
@@ -16,6 +17,8 @@ type Props = {
 };
 
 const { title, description = SITE_DESCRIPTION, fonts, bodyClass } = Astro.props;
+/** varianta 3 pe închis (fără v3--light) are fundal espresso */
+const dark = (bodyClass ?? "").split(" ").includes("v3") && !(bodyClass ?? "").includes("v3--light");
 const pageTitle = title ? `${title} · ${SITE_NAME}` : SITE_NAME;
 ---
 
@@ -24,6 +27,7 @@ const pageTitle = title ? `${title} · ${SITE_NAME}` : SITE_NAME;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {dark ? <ColorScheme bg="#161412" fg="#f3eee6" /> : <ColorScheme bg="#f4efe7" fg="#1b1815" />}
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, nofollow" />

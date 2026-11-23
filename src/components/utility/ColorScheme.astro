@@ -1,0 +1,20 @@
+---
+/**
+ * Oprește „Adaptive Dark Mode” din Safari (27.3+), care întunecă automat site-urile
+ * deschise care nu declară o temă dark. O pagină care declară „light dark” nu e transformată,
+ * iar body{color-scheme:light} ține pagina și formularele pe schema deschisă.
+ * Nu folosi „only light”: pe iPhone nu funcționează. Fără stiluri de dark mode, fără prefers-color-scheme.
+ * Se pune în <head>, înaintea foilor de stil; is:inline îl ține în HTML-ul inițial.
+ */
+type Props = {
+  /** fundalul paginii, din tokenurile site-ului */
+  bg: string;
+  /** culoarea textului, din tokenurile site-ului */
+  fg: string;
+};
+const { bg, fg } = Astro.props;
+const css = `html:root{color-scheme:light dark;background:${bg};color:${fg}}body{color-scheme:light}`;
+---
+
+<meta name="color-scheme" content="light dark" />
+<style is:inline set:html={css}></style>

@@ -5,6 +5,7 @@ import { SITE_NAME, SITE_DESCRIPTION, CLINIC } from "@/consts.ts";
 import { PRIORITY, COMPLETE } from "@/data/treatments.ts";
 import Mark from "@/components/brand/Mark.astro";
 import { isArc, localPath } from "@/utils/path.ts";
+import ColorScheme from "@/components/utility/ColorScheme.astro";
 
 type Props = {
   title?: string;
@@ -35,6 +36,7 @@ const links = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {arc ? <ColorScheme bg="#f4efe7" fg="#1b1815" /> : <ColorScheme bg="#f7f2ea" fg="#1f1813" />}
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, nofollow" />
