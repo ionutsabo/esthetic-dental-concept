@@ -1,7 +1,8 @@
 /* Esthetic Dental Center: concept vizual (editorial lux + cald, organic) */
 
 :root {
-  /* Paleta din ghidul de brand EDC (dec. 2024): Rich Gold #C9B474, Dark Brown #302A23.
+  /* Paleta din ghidul de brand EDC (dec. 2024): Rich Gold #C9B474, Dark Brown #302A23,
+     plus petrol #035060 (din designul interior al clinicii, adăugat de agenție).
      Fundalurile deschise sunt nuanțe ale auriului. */
   --paper: #fbf9f3;
   --bone: #f4efe1;
@@ -12,8 +13,8 @@
   --ink: #302a23;
   --muted: #6e675f;
   --line: rgba(48, 42, 35, 0.14);
-  --terracotta: #c9b474;
-  --sage: #c9b474;
+  --terracotta: #035060;
+  --sage: #035060;
 
   /* Fontul brandului e Cocogoose (Thin/Light); Outfit e substitutul gratuit cel mai apropiat. */
   --serif: "Outfit", system-ui, -apple-system, sans-serif;
@@ -1122,7 +1123,7 @@ img.duotone {
 }
 
 .phead__title em {
-  color: var(--terracotta);
+  color: var(--clay);
   letter-spacing: -0.025em;
 }
 
